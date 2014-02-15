@@ -27,15 +27,35 @@ public class PostLoginBrowserActivity extends BrowserActivity {
 					Log.d(PostLoginBrowserActivity.class.getName(),"url contains login.php!");
 					showLoginView();
 					return false;
+				}else if(isPDF(url) || isAnImage(url)){
+					Log.d(PostLoginBrowserActivity.class.getName(),"img or pdf!");
+					showCustomView(url);
+					return false;
 				}
+				
 				view.loadUrl(url);
 				return true;
 			}
 		};
 	}
 	
+	private boolean isPDF(String url){
+		return url.endsWith("pdf");
+	}
+	private boolean isAnImage(String url){
+		return url.endsWith("jpg") || url.endsWith("jpeg") || url.endsWith("png") || url.endsWith("gif");
+	}
+	
 	private void showLoginView(){
 		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(intent);
+	}
+	
+	private void showCustomView(String url){
+		Bundle bundle = new Bundle();
+		bundle.putString(AppConstants.WEB_URL_KEY, url);
+		Intent intent = new Intent(getApplicationContext(), SimpleBrowserActivity.class);
+		intent.putExtras(bundle);
 		startActivity(intent);
 	}
 

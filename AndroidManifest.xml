@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme" >
 
         <!-- launch activity -->
-        <activity android:name="com.aenimastudio.nis.activities.LoginActivity" >
+        <activity android:name="com.aenimastudio.nis.activities.LoginActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.aenimastudio.nis.activities.SimpleBrowserActivity" />
-        <activity android:name="com.aenimastudio.nis.activities.PostLoginBrowserActivity" />
+        <activity android:name="com.aenimastudio.nis.activities.PostLoginBrowserActivity" android:noHistory="true"/>
     </application>
 
 </manifest>

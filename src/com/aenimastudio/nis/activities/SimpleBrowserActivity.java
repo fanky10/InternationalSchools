@@ -23,5 +23,11 @@ public class SimpleBrowserActivity extends BrowserActivity{
 		webView.loadUrl(webPage);
 	}
 	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		//redirect to home...?
+	}
+	
 
 }
