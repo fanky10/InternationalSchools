@@ -1,5 +1,14 @@
 <resources>
 
     <string name="app_name">NothernInternationalSchool</string>
+    <string name="login_get_url">http://ismobileapp.com/is/northern-school/login.php</string>
+    <string name="login_post_url">http://ismobileapp.com/is/northern-school/login.php</string>
+    <string name="login_field_username">nombre_usuario</string>
+    <string name="login_field_password">contrasenia</string>
+    <string name="login_field_submit">login=INICIAR</string>
+    
+    <!-- color configuration -->
+    <color name="home_background">#313131</color>
+    <color name="login_background">@color/home_background</color>
 
 </resources>
