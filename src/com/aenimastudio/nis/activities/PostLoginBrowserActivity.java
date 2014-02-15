@@ -2,7 +2,9 @@ package com.aenimastudio.nis.activities;
 
 import org.apache.http.util.EncodingUtils;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -20,10 +22,21 @@ public class PostLoginBrowserActivity extends BrowserActivity {
 		return new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				Log.d(PostLoginBrowserActivity.class.getName(),"url given! "+url);
+				if(url.contains("login.php")){
+					Log.d(PostLoginBrowserActivity.class.getName(),"url contains login.php!");
+					showLoginView();
+					return false;
+				}
 				view.loadUrl(url);
 				return true;
 			}
 		};
+	}
+	
+	private void showLoginView(){
+		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(intent);
 	}
 
 	@Override

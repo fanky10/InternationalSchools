@@ -6,7 +6,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.aenimastudio.nis.R;
-import com.aenimastudio.nis.constants.AppConstants;
 
 public abstract class BrowserActivity extends BaseActivity {
 	protected WebView webView;
@@ -28,18 +27,9 @@ public abstract class BrowserActivity extends BaseActivity {
 		webView.setWebViewClient(getWebViewClient());
 		showWebpage();
 	}
-	protected abstract WebViewClient getWebViewClient();
-	protected abstract void showWebpage();
-	
-	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
-		super.onSaveInstanceState(savedInstanceState);
-	}
 
-	@Override
-	public void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-		init();
-	}
+	protected abstract WebViewClient getWebViewClient();
+
+	protected abstract void showWebpage();
 
 }
