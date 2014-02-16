@@ -11,8 +11,12 @@
     <string name="txtPasswordText">abc123</string>
     <string name="btnSubmitText">Iniciar</string>
     
+    <!-- integer configuration -->
+    <integer name="intro_display_length">1500</integer>
+    
     <!-- color configuration -->
-    <color name="home_background">#313131</color>
+    <color name="home_background">#007EA3</color>
     <color name="login_background">@color/home_background</color>
+    <color name="intro_background">@color/home_background</color>
 
 </resources>

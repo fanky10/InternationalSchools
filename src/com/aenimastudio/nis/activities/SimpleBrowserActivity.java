@@ -26,7 +26,6 @@ public class SimpleBrowserActivity extends BrowserActivity{
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		//redirect to home...?
 	}
 	
 
