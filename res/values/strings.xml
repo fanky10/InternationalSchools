@@ -8,7 +8,9 @@
     <string name="login_field_submit">login=INICIAR</string>
     
     <string name="txtUsernameText">northern</string>
+    <string name="txtUsernameHint">Usuario</string>
     <string name="txtPasswordText">abc123</string>
+    <string name="txtPasswordHint">Contraseña</string>
     <string name="btnSubmitText">INICIAR</string>
     <string name="txtRegisterText">Solicitá tu usuario y contraseña.</string>
     
@@ -19,7 +21,7 @@
     <color name="home_background">#007EA3</color>
     <color name="login_background">@color/home_background</color>
     <color name="intro_background">@color/home_background</color>
-    <color name="login_input_borders">#BBBDC0</color>
+    <color name="login_input_borders">#bcbdc0</color>
     <color name="login_submit_color">#1CDCFF</color>
 
 </resources>

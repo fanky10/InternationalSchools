@@ -38,7 +38,7 @@
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/bkg_txtloginusuario"
                 android:ems="10"
-                android:text="@string/txtUsernameText" >
+                android:hint="@string/txtUsernameHint" >
 
                 <requestFocus />
             </EditText>
@@ -50,8 +50,8 @@
                 android:layout_below="@+id/txtUsername"
                 android:background="@drawable/bkg_txtloginpassword"
                 android:ems="10"
-                android:inputType="textPassword"
-                android:text="@string/txtPasswordText" />
+                android:hint="@string/txtPasswordHint"
+                android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/btnLogin"
