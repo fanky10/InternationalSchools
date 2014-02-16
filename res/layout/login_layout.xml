@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/login_background"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -9,35 +10,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true" >
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
 
-        <EditText
-            android:id="@+id/txtUsername"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/loginLogo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:ems="10" 
-            android:text="@string/txtUsernameText">
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo_ins" />
 
-            <requestFocus />
-        </EditText>
-
-        <EditText
-            android:id="@+id/txtPassword"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/loginLayout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtUsername"
-            android:ems="10"
-            android:inputType="textPassword" 
-			android:text="@string/txtPasswordText"/>
+            android:layout_alignLeft="@+id/loginLogo"
+            android:layout_alignRight="@+id/loginLogo"
+            android:layout_below="@id/loginLogo"
+            android:layout_marginTop="10dp" >
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtPassword"
-            android:text="@string/btnSubmitText" />
+            <EditText
+                android:id="@+id/txtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/bkg_txtloginusuario"
+                android:ems="10"
+                android:text="@string/txtUsernameText" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtUsername"
+                android:background="@drawable/bkg_txtloginpassword"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:text="@string/txtPasswordText" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPassword"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bkg_btnsubmitlogin"
+                android:text="@string/btnSubmitText"
+                android:textAlignment="center"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/txtRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnLogin"
+                android:layout_marginTop="10dp"
+                android:text="@string/txtRegisterText" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

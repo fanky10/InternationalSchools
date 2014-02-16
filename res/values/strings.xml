@@ -9,7 +9,8 @@
     
     <string name="txtUsernameText">northern</string>
     <string name="txtPasswordText">abc123</string>
-    <string name="btnSubmitText">Iniciar</string>
+    <string name="btnSubmitText">INICIAR</string>
+    <string name="txtRegisterText">Solicitá tu usuario y contraseña.</string>
     
     <!-- integer configuration -->
     <integer name="intro_display_length">1500</integer>
@@ -18,5 +19,7 @@
     <color name="home_background">#007EA3</color>
     <color name="login_background">@color/home_background</color>
     <color name="intro_background">@color/home_background</color>
+    <color name="login_input_borders">#BBBDC0</color>
+    <color name="login_submit_color">#1CDCFF</color>
 
 </resources>
