@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity {
 		Bundle bundle = new Bundle();
 		bundle.putString(AppConstants.LOGIN_USERNAME_KEY, username);
 		bundle.putString(AppConstants.LOGIN_PASSWORD_KEY, password);
-		Intent intent = new Intent(getApplicationContext(), PostLoginBrowserActivity.class);
+		Intent intent = new Intent(getApplicationContext(), BrowserLoginFilterActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}

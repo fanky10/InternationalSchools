@@ -3,6 +3,7 @@ package com.aenimastudio.nis.activities;
 import org.apache.http.util.EncodingUtils;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
@@ -11,7 +12,17 @@ import android.webkit.WebViewClient;
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
 
-public class PostLoginBrowserActivity extends BrowserActivity {
+/**
+ * 
+ * @author fanky10
+ * filters if the current user should be redirected to: 
+ * login activity with corresponding error message, 
+ * or home depending on redirection from server. 
+ *
+ */
+public class BrowserLoginFilterActivity extends AbstractBrowserActivity {
+	private static final String LOG_TAG = BrowserLoginFilterActivity.class.getName();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,39 +33,35 @@ public class PostLoginBrowserActivity extends BrowserActivity {
 		return new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				Log.d(PostLoginBrowserActivity.class.getName(),"url given! "+url);
-				if(url.contains("login.php")){
-					Log.d(PostLoginBrowserActivity.class.getName(),"url contains login.php!");
-					showLoginView();
-					return false;
-				}else if(isPDF(url) || isAnImage(url)){
-					Log.d(PostLoginBrowserActivity.class.getName(),"img or pdf!");
-					showCustomView(url);
-					return false;
+				if (isLoginPage(url)) {
+					errorLoginView();
 				}
-				
-				view.loadUrl(url);
+				useSimpleBrowser(url);
 				return true;
 			}
+
+			@Override
+			public void onPageStarted(WebView webView, String url, Bitmap favicon) {
+				//check what is going on
+			}
+
+			@Override
+			public void onPageFinished(WebView webView, String url) {
+
+			}
+
 		};
 	}
-	
-	private boolean isPDF(String url){
-		return url.endsWith("pdf");
+
+	private void errorLoginView() {
+		String loginErrorMessage = getResources().getString(R.string.login_failed_message);
+		showLoginView(loginErrorMessage);
 	}
-	private boolean isAnImage(String url){
-		return url.endsWith("jpg") || url.endsWith("jpeg") || url.endsWith("png") || url.endsWith("gif");
-	}
-	
-	private void showLoginView(){
-		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-		startActivity(intent);
-	}
-	
-	private void showCustomView(String url){
+
+	private void useSimpleBrowser(String url) {
 		Bundle bundle = new Bundle();
 		bundle.putString(AppConstants.WEB_URL_KEY, url);
-		Intent intent = new Intent(getApplicationContext(), SimpleBrowserActivity.class);
+		Intent intent = new Intent(getApplicationContext(), BrowserImagePDFFilterActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}
@@ -65,11 +72,11 @@ public class PostLoginBrowserActivity extends BrowserActivity {
 		String fieldUsername = getResources().getString(R.string.login_field_username);
 		String fieldPassword = getResources().getString(R.string.login_field_password);
 		String fieldSubmit = getResources().getString(R.string.login_field_submit);
-		
+
 		Bundle bundle = getIntent().getExtras();
 		String username = bundle.getString(AppConstants.LOGIN_USERNAME_KEY);
 		String password = bundle.getString(AppConstants.LOGIN_PASSWORD_KEY);
-		
+
 		StringBuilder sbPostData = new StringBuilder();
 		sbPostData.append(fieldUsername).append("=").append(username);
 		sbPostData.append("&").append(fieldPassword).append("=").append(password);

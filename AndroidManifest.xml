@@ -25,8 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.aenimastudio.nis.activities.LoginActivity" android:noHistory="true"/>
-        <activity android:name="com.aenimastudio.nis.activities.PostLoginBrowserActivity" android:noHistory="true"/>
-        <activity android:name="com.aenimastudio.nis.activities.SimpleBrowserActivity" />
+        <activity android:name="com.aenimastudio.nis.activities.BrowserLoginFilterActivity" android:noHistory="true"/>
+        <activity android:name="com.aenimastudio.nis.activities.BrowserImagePDFFilterActivity" />
     </application>
 
 </manifest>
