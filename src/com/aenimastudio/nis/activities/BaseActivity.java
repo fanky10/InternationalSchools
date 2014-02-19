@@ -5,11 +5,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.aenimastudio.nis.R;
+
 public abstract class BaseActivity extends FragmentActivity {
+	private String webAppUrl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//builds complete url 
+		StringBuilder sb = new StringBuilder();
+		sb.append(getResources().getString(R.string.service_url));
+		sb.append(getResources().getString(R.string.service_context));
+		webAppUrl = sb.toString();
 	}
 
 	protected void makePhoneCall(String phoneNumber) {
@@ -22,6 +30,14 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
+	}
+
+	public String getWebAppUrl() {
+		return webAppUrl;
+	}
+
+	public void setWebAppUrl(String webAppUrl) {
+		this.webAppUrl = webAppUrl;
 	}
 
 }

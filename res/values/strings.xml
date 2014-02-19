@@ -1,16 +1,18 @@
 <resources>
 
     <string name="app_name">NothernInternationalSchool</string>
+    <string name="service_url">http://ismobileapp.com</string>
+    <string name="service_context">/international_schools/northern-school</string>
     
-    <!-- login / logout configuration -->
-    <string name="login_get_url">http://ismobileapp.com/is/northern-school/login.php</string>
-    <string name="login_post_url">http://ismobileapp.com/is/northern-school/login.php</string>
-    <string name="login_field_username">nombre_usuario</string>
-    <string name="login_field_password">contrasenia</string>
-    <string name="login_field_submit">login=INICIAR</string>
-    <string name="login_page">login.php</string>
-    <string name="logout_page">logout.php</string>
+    <string name="login_page">/login.php</string>
+    <string name="logout_page">/logout.php</string>
+    <string name="news_page">/news.php</string>
+    <string name="news_param_user_id">id_usuario</string>
+    
+    <string name="login_field_username">user</string>
+    <string name="login_field_password">pass</string>
     <string name="login_failed_message">Usuario y/o contraseña incorrecto</string>
+    <string name="login_error_message">Trate nuevamente más tarde</string>
     
     <string name="txtUsernameText">northern</string>
     <string name="txtPasswordText">abc123</string>

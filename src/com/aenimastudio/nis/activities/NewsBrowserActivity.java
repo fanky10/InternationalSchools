@@ -9,8 +9,8 @@ import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.constants.BrowserUrlUtils;
 
-public class BrowserImagePDFFilterActivity extends AbstractBrowserActivity {
-	private static final String LOG_TAG = BrowserImagePDFFilterActivity.class.getName();
+public class NewsBrowserActivity extends AbstractBrowserActivity {
+	private static final String LOG_TAG = NewsBrowserActivity.class.getName();
 
 	@Override
 	protected WebViewClient getWebViewClient() {
@@ -22,10 +22,10 @@ public class BrowserImagePDFFilterActivity extends AbstractBrowserActivity {
 					Log.d(LOG_TAG, "url is an image!!");
 					redirectToImageBrowser(url);
 					return true;
-				}else if(BrowserUrlUtils.isPDF(url)){
+				} else if (BrowserUrlUtils.isPDF(url)) {
 					redirectToPDFBrowser(url);
 					return true;
-				}else if(isLoginPage(url)){
+				} else if (isLoginPage(url)) {
 					showLoginView(null);
 					return true;
 				}
@@ -46,10 +46,17 @@ public class BrowserImagePDFFilterActivity extends AbstractBrowserActivity {
 	@Override
 	protected void showWebpage() {
 		Bundle bundle = getIntent().getExtras();
-		String webPage = getResources().getString(R.string.login_get_url);
-		if (bundle != null) {
-			webPage = (String) bundle.get(AppConstants.WEB_URL_KEY);
+		if (bundle == null) {
+			throw new IllegalArgumentException("This Activity should be intented with a bundle object");
 		}
+
+		Integer userId = bundle.getInt(AppConstants.SHARED_USER_ID_KEY);
+		if (userId == null || userId < 1) {
+			throw new IllegalArgumentException("This Activity should be intented with a valid userId");
+		}
+		
+		String webPage = new StringBuilder().append(getWebAppUrl()).append(getResources().getString(R.string.news_page)).append("?")
+				.append(getResources().getString(R.string.news_param_user_id)).append("=").append(userId).toString();
 		webView.loadUrl(webPage);
 	}
 
