@@ -30,15 +30,21 @@ import com.aenimastudio.nis.forms.UserForm;
 import com.aenimastudio.nis.utils.LoginResponseJsonParser;
 
 public class LoginActivity extends BaseActivity {
-
+	private static final Boolean AUTOMATIC_LOGIN = Boolean.TRUE;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(AUTOMATIC_LOGIN){
+			Toast.makeText(getApplicationContext(), "Buscando Datos Servidor...", Toast.LENGTH_SHORT).show();
+			logMeIn(getResources().getString(R.string.txtUsernameText), getResources().getString(R.string.txtPasswordText));
+			return;
+		}
 		setContentView(R.layout.login_layout);
 		init();
 	}
 
 	private void init() {
+		
 		Button btnLogin = (Button) findViewById(R.id.btnLogin);
 		final EditText txtUsername = (EditText) findViewById(R.id.txtUsername);
 		final EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
@@ -51,7 +57,7 @@ public class LoginActivity extends BaseActivity {
 		});
 	}
 
-	private void logMeIn(String username, String password) {
+	public void logMeIn(String username, String password) {
 		Log.d(LoginActivity.class.getName(), "login me in with: " + username + " : " + password);
 		UserForm form = new UserForm(username, password);
 		new AsyncLoginTask(form).execute();
