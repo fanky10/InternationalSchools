@@ -1,9 +1,13 @@
 package com.aenimastudio.nis.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
@@ -63,6 +67,37 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
+	}
+	
+	protected void configureMenuBar() {
+		ImageView imgFood = (ImageView) findViewById(R.id.commonMenuFood);
+		imgFood.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showFoodMenu();
+			}
+		});
+
+		ImageView imgLogout = (ImageView) findViewById(R.id.commonMenuLogout);
+		imgLogout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				logout();
+			}
+
+		});
+	}
+
+	private void logout() {
+		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(intent);
+	}
+
+	private void showFoodMenu() {
+		Intent intent = new Intent(getApplicationContext(), FoodMenuBrowserActivity.class);
+		startActivity(intent);
 	}
 
 }

@@ -14,7 +14,8 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.browser_layout);
+		setContentView(R.layout.news_layout);
+		configureMenuBar();
 		init();
 	}
 
@@ -28,6 +29,8 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		webView.setWebViewClient(getWebViewClient());
 		showWebpage();
 	}
+
+	protected abstract void configureMenuBar();
 
 	protected abstract WebViewClient getWebViewClient();
 

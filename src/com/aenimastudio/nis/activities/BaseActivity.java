@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 
 import com.aenimastudio.nis.R;
 
@@ -15,8 +18,9 @@ public abstract class BaseActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		//builds complete url 
 		StringBuilder sb = new StringBuilder();
-		sb.append(getResources().getString(R.string.service_url));
-		sb.append(getResources().getString(R.string.service_context));
+		sb.append(getResources().getString(R.string.web_url));
+		sb.append(getResources().getString(R.string.web_context));
+		sb.append(getResources().getString(R.string.web_app_context));
 		webAppUrl = sb.toString();
 	}
 

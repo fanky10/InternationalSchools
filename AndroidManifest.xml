@@ -26,6 +26,7 @@
         </activity>
         <activity android:name="com.aenimastudio.nis.activities.LoginActivity" android:noHistory="true"/>
         <activity android:name="com.aenimastudio.nis.activities.NewsBrowserActivity" android:noHistory="true"/>
+        <activity android:name="com.aenimastudio.nis.activities.FoodMenuBrowserActivity" android:noHistory="true"/>
     </application>
 
 </manifest>

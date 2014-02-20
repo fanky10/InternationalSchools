@@ -38,7 +38,7 @@
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/bkg_txtloginusuario"
                 android:ems="10"
-                android:hint="@string/txtUsernameHint" >
+                android:hint="@string/hint_username" >
 
                 <requestFocus />
             </EditText>
@@ -50,7 +50,7 @@
                 android:layout_below="@+id/txtUsername"
                 android:background="@drawable/bkg_txtloginpassword"
                 android:ems="10"
-                android:hint="@string/txtPasswordHint"
+                android:hint="@string/hint_password"
                 android:inputType="textPassword" />
 
             <Button
@@ -60,7 +60,7 @@
                 android:layout_below="@+id/txtPassword"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bkg_btnsubmitlogin"
-                android:text="@string/btnSubmitText"
+                android:text="@string/text_submit"
                 android:textAlignment="center"
                 android:textColor="@android:color/white" />
 
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btnLogin"
                 android:layout_marginTop="10dp"
-                android:text="@string/txtRegisterText" />
+                android:text="@string/text_register" />
         </RelativeLayout>
     </RelativeLayout>
 
