@@ -15,7 +15,7 @@ public class PDFBrowserActivity extends AbstractBrowserActivity {
 	private NetworkStatusListener networkStatusListener;
 
 	@Override
-	protected void showWebpage() {
+	protected void loadWebPage() {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle == null) {
 			throw new IllegalArgumentException("This Activity should be intented with a bundle object");
@@ -51,7 +51,7 @@ public class PDFBrowserActivity extends AbstractBrowserActivity {
 					warningLayout.setVisibility(View.VISIBLE);
 				} else if(status == NetworkStatus.ONLINE){
 					warningLayout.setVisibility(View.GONE);
-					showWebpage();
+					loadWebPage();
 				}
 			}
 		};

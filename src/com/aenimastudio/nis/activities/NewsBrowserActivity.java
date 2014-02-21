@@ -21,6 +21,8 @@ public class NewsBrowserActivity extends BaseActivity {
 	private static final String LOG_TAG = NewsBrowserActivity.class.getName();
 	private WebView webView;
 	private NetworkStatusListener networkStatusListener;
+	private int webViewErrorCode = 0;
+	private boolean pageFinishedLoading = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class NewsBrowserActivity extends BaseActivity {
 		webView.getSettings().setSupportZoom(true);
 		webView.getSettings().setUseWideViewPort(true);
 		webView.setWebViewClient(getWebViewClient());
-		showWebpage();
+		loadWebPage();
 	}
 
 	protected WebViewClient getWebViewClient() {
@@ -55,6 +57,17 @@ public class NewsBrowserActivity extends BaseActivity {
 				view.loadUrl(url);
 				return false;
 			}
+
+			@Override
+			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+				webViewErrorCode = errorCode;
+			}
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				pageFinishedLoading = true;
+				webViewErrorCode = 0;
+			}
 		};
 	}
 
@@ -66,7 +79,7 @@ public class NewsBrowserActivity extends BaseActivity {
 		startActivity(intent);
 	}
 
-	protected void showWebpage() {
+	protected void loadWebPage() {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle == null) {
 			throw new IllegalArgumentException("This Activity should be intented with a bundle object");
@@ -80,7 +93,14 @@ public class NewsBrowserActivity extends BaseActivity {
 		String webPage = new StringBuilder().append(getWebAppUrl())
 				.append(getResources().getString(R.string.news_page)).append("?")
 				.append(getResources().getString(R.string.news_param_user_id)).append("=").append(userId).toString();
+
 		webView.loadUrl(webPage);
+	}
+
+	private void reloadPage() {
+		if (webViewErrorCode > 0 || !pageFinishedLoading) {
+			loadWebPage();
+		}
 	}
 
 	@Override
@@ -126,9 +146,9 @@ public class NewsBrowserActivity extends BaseActivity {
 			public void connectionChecked(NetworkStatus status) {
 				if (status == NetworkStatus.OFFLINE) {
 					warningLayout.setVisibility(View.VISIBLE);
-				} else if(status == NetworkStatus.ONLINE){
+				} else if (status == NetworkStatus.ONLINE) {
 					warningLayout.setVisibility(View.GONE);
-					showWebpage();
+					reloadPage();
 				}
 			}
 		};

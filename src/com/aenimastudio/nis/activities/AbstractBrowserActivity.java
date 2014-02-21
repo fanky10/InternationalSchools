@@ -9,6 +9,8 @@ import com.aenimastudio.nis.R;
 
 public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected WebView webView;
+	private int webViewErrorCode = 0;
+	private boolean pageFinishedLoading = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,8 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		webView.getSettings().setBuiltInZoomControls(true);
 		webView.getSettings().setSupportZoom(true);
 		webView.getSettings().setUseWideViewPort(true);
-		webView.setWebViewClient(new WebViewClient());
-		showWebpage();
+		webView.setWebViewClient(getWebViewClient());
+		loadWebPage();
 	}
 
 	@Override
@@ -35,7 +37,28 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		finish();
 	}
 
-	protected abstract void showWebpage();
+	protected void reloadPage() {
+		if (webViewErrorCode > 0 || !pageFinishedLoading) {
+			loadWebPage();
+		}
+	}
+
+	private WebViewClient getWebViewClient() {
+		return new WebViewClient() {
+			@Override
+			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+				webViewErrorCode = errorCode;
+			}
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				pageFinishedLoading = true;
+				webViewErrorCode = 0;
+			}
+		};
+	}
+
+	protected abstract void loadWebPage();
 
 	protected abstract void configureMenuBar();
 }

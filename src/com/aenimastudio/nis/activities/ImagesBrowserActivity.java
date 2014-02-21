@@ -8,7 +8,7 @@ import com.aenimastudio.nis.constants.AppConstants;
 public class ImagesBrowserActivity extends AbstractBrowserActivity {
 
 	@Override
-	protected void showWebpage() {
+	protected void loadWebPage() {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle == null) {
 			throw new IllegalArgumentException("This Activity should be intented with a bundle object");
