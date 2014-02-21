@@ -83,7 +83,11 @@ public class NewsBrowserActivity extends BaseActivity {
 				.append(getResources().getString(R.string.news_param_user_id)).append("=").append(userId).toString();
 		webView.loadUrl(webPage);
 	}
-
+	@Override
+	protected void logout(){
+		super.logout();
+		finish();
+	}
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
