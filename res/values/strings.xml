@@ -28,6 +28,7 @@
 
     <!-- integer configuration -->
     <integer name="intro_display_length">1500</integer>
+    <integer name="check_connection_delay">30000</integer>
 
     <!-- color configuration -->
     <color name="home_background">#007EA3</color>

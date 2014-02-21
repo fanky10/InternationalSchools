@@ -9,6 +9,7 @@
 
     <!-- permission list -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +27,7 @@
         </activity>
         <activity android:name="com.aenimastudio.nis.activities.LoginActivity" android:noHistory="true"/>
         <activity android:name="com.aenimastudio.nis.activities.NewsBrowserActivity" android:noHistory="true"/>
-        <activity android:name="com.aenimastudio.nis.activities.FoodMenuBrowserActivity" android:noHistory="true"/>
+        <activity android:name="com.aenimastudio.nis.activities.PDFBrowserActivity" android:noHistory="true"/>
     </application>
 
 </manifest>

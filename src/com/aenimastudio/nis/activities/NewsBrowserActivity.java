@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -13,10 +14,30 @@ import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.constants.BrowserUrlUtils;
 
-public class NewsBrowserActivity extends AbstractBrowserActivity {
+public class NewsBrowserActivity extends BaseActivity {
 	private static final String LOG_TAG = NewsBrowserActivity.class.getName();
+	
+	protected WebView webView;
 
 	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.news_layout);
+		configureMenuBar();
+		init();
+	}
+
+	private void init() {
+		webView = (WebView) findViewById(R.id.newsWebView);
+		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+		webView.getSettings().setJavaScriptEnabled(true);
+		webView.getSettings().setBuiltInZoomControls(true);
+		webView.getSettings().setSupportZoom(true);
+		webView.getSettings().setUseWideViewPort(true);
+		webView.setWebViewClient(getWebViewClient());
+		showWebpage();
+	}
+
 	protected WebViewClient getWebViewClient() {
 		return new WebViewClient() {
 			@Override
@@ -27,7 +48,7 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 					redirectToImageBrowser(url);
 					return true;
 				} else if (BrowserUrlUtils.isPDF(url)) {
-					redirectToPDFBrowser(url);
+					showPDFView(url);
 					return true;
 				} else if (isLoginPage(url)) {
 					showLoginView(null);
@@ -43,11 +64,7 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 		throw new UnsupportedOperationException("not supported yet");
 	}
 
-	private void redirectToPDFBrowser(String url) {
-		throw new UnsupportedOperationException("not supported yet");
-	}
 
-	@Override
 	protected void showWebpage() {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle == null) {
@@ -96,8 +113,11 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 	}
 
 	private void showFoodMenu() {
-		Intent intent = new Intent(getApplicationContext(), FoodMenuBrowserActivity.class);
-		startActivity(intent);
+		StringBuilder sbUrl = new StringBuilder();
+		sbUrl.append(getResources().getString(R.string.web_url));
+		sbUrl.append(getResources().getString(R.string.web_context));
+		sbUrl.append(getResources().getString(R.string.food_menu_path));
+		showPDFView(sbUrl.toString());
 	}
 
 }
