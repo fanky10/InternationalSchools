@@ -13,7 +13,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,21 +30,16 @@ import com.aenimastudio.nis.forms.UserForm;
 import com.aenimastudio.nis.utils.LoginResponseJsonParser;
 
 public class LoginActivity extends BaseActivity {
-	private static final Boolean AUTOMATIC_LOGIN = Boolean.TRUE;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(AUTOMATIC_LOGIN){
-			Toast.makeText(getApplicationContext(), "Buscando Datos Servidor...", Toast.LENGTH_SHORT).show();
-			logMeIn(getResources().getString(R.string.txtUsernameText), getResources().getString(R.string.txtPasswordText));
-			return;
-		}
 		setContentView(R.layout.login_layout);
 		init();
 	}
 
 	private void init() {
-		
+
 		Button btnLogin = (Button) findViewById(R.id.btnLogin);
 		final EditText txtUsername = (EditText) findViewById(R.id.txtUsername);
 		final EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
@@ -58,7 +53,6 @@ public class LoginActivity extends BaseActivity {
 	}
 
 	public void logMeIn(String username, String password) {
-		Log.d(LoginActivity.class.getName(), "login me in with: " + username + " : " + password);
 		UserForm form = new UserForm(username, password);
 		new AsyncLoginTask(form).execute();
 	}
@@ -72,15 +66,20 @@ public class LoginActivity extends BaseActivity {
 	};
 
 	private void showErrorMessage() {
-		showErrorMessage("Please try again later");
+		showErrorMessage("Por favor trate mas tarde");
 	}
-
-	private void showNews(Integer userId) {
-		Bundle bundle = new Bundle();
-		bundle.putInt(AppConstants.SHARED_USER_ID_KEY, userId);
-		Intent intent = new Intent(getApplicationContext(), NewsBrowserActivity.class);
-		intent.putExtras(bundle);
-		startActivity(intent);
+	
+	private void loginSuccess(UserForm userForm, Integer userId){
+		//save data and show news!
+		SharedPreferences.Editor editor = appSettings.edit();
+		editor.putString(AppConstants.SHARED_SETTINGS_NAME, userForm.getUsername());
+		editor.putString(AppConstants.SHARED_SETTINGS_PASSWORD, userForm.getPassword());
+		editor.putInt(AppConstants.SHARED_SETTINGS_USER_ID, userId);
+		editor.putLong(AppConstants.SHARED_SETTINGS_MOD_TIME, System.currentTimeMillis());
+		// Commit the edits!
+		editor.commit();
+		
+		startActivity(getLoginSuccessIntent(userId));
 	}
 
 	class AsyncLoginTask extends AsyncTask<Void, Void, String> {
@@ -127,7 +126,7 @@ public class LoginActivity extends BaseActivity {
 						//bad login
 						showLoginFailed();
 					} else {
-						showNews(loginResponse.getUserId());
+						loginSuccess(userForm,loginResponse.getUserId());
 					}
 				} catch (JSONException ex) {
 					showErrorMessage();

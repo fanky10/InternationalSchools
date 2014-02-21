@@ -7,6 +7,13 @@ public class AppConstants {
 	public static final String LOGIN_USERNAME_KEY = "username_key";
 	public static final String LOGIN_PASSWORD_KEY = "password_key";
 	
+	// preferences settings
+	public static final String SHARED_SETTINGS_NAME = "pref_settings_file";
+	public static final String SHARED_SETTINGS_USERNAME = "pref_settings_username";
+	public static final String SHARED_SETTINGS_PASSWORD = "pref_settings_password";
+	public static final String SHARED_SETTINGS_USER_ID = "pref_settings_user_id";
+	public static final String SHARED_SETTINGS_MOD_TIME = "pref_settings_mod_time";
+	
 	
 	// json object keys
 	// here if any

@@ -1,7 +1,9 @@
 package com.aenimastudio.nis.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	private String webAppUrl;
 	// The BroadcastReceiver that tracks network connectivity changes.
 	private NetworkReceiver receiver;
+	protected SharedPreferences appSettings;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +34,15 @@ public abstract class BaseActivity extends FragmentActivity {
 		IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 		receiver = new NetworkReceiver();
 		this.registerReceiver(receiver, filter);
+
+		//preferences configuration
+		appSettings = getSharedPreferences(AppConstants.SHARED_SETTINGS_NAME, Context.MODE_PRIVATE);
 	}
-	
+
 	protected void addNetworkStatusListener(NetworkStatusListener networkStatusListener) {
 		receiver.addNetworkStatusListener(networkStatusListener);
 	}
+
 	protected void removeNetworkStatusListener(NetworkStatusListener networkStatusListener) {
 		receiver.removeNetworkStatusListener(networkStatusListener);
 	}
@@ -84,12 +91,43 @@ public abstract class BaseActivity extends FragmentActivity {
 		startActivity(intent);
 	}
 
+	protected Intent getLoginSuccessIntent(Integer userId) {
+		Bundle bundle = new Bundle();
+		bundle.putInt(AppConstants.SHARED_USER_ID_KEY, userId);
+		Intent intent = new Intent(getApplicationContext(), NewsBrowserActivity.class);
+		intent.putExtras(bundle);
+		return intent;
+	}
+	
+	protected void logout() {
+		//save data and show news!
+		SharedPreferences.Editor editor = appSettings.edit();
+		editor.remove(AppConstants.SHARED_SETTINGS_NAME);
+		editor.remove(AppConstants.SHARED_SETTINGS_PASSWORD);
+		editor.remove(AppConstants.SHARED_SETTINGS_USER_ID);
+		editor.remove(AppConstants.SHARED_SETTINGS_MOD_TIME);
+		
+		// Commit the edits!
+		editor.commit();
+
+		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(intent);
+	}
+
 	public String getWebAppUrl() {
 		return webAppUrl;
 	}
 
 	public void setWebAppUrl(String webAppUrl) {
 		this.webAppUrl = webAppUrl;
+	}
+
+	public SharedPreferences getAppSettings() {
+		return appSettings;
+	}
+
+	public void setAppSettings(SharedPreferences appSettings) {
+		this.appSettings = appSettings;
 	}
 
 }

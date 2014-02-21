@@ -26,11 +26,11 @@ public class NewsBrowserActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.news_layout);
-		configureMenuBar();
 		init();
 	}
 
 	private void init() {
+		configureMenuBar();
 		webView = (WebView) findViewById(R.id.newsWebView);
 		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 		webView.getSettings().setJavaScriptEnabled(true);
@@ -39,27 +39,6 @@ public class NewsBrowserActivity extends BaseActivity {
 		webView.getSettings().setUseWideViewPort(true);
 		webView.setWebViewClient(getWebViewClient());
 		showWebpage();
-
-		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
-		warningLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				warningLayout.setVisibility(View.INVISIBLE);
-			}
-		});
-
-		networkStatusListener = new NetworkStatusListener() {
-			@Override
-			public void connectionChecked(NetworkStatus status) {
-				if (status == NetworkStatus.OFFLINE) {
-					warningLayout.setVisibility(View.VISIBLE);
-				} else {
-					warningLayout.setVisibility(View.INVISIBLE);
-				}
-			}
-		};
-		addNetworkStatusListener(networkStatusListener);
 	}
 
 	protected WebViewClient getWebViewClient() {
@@ -109,9 +88,10 @@ public class NewsBrowserActivity extends BaseActivity {
 	public void onBackPressed() {
 		super.onBackPressed();
 	}
-	
+
 	@Override
-	public void onDestroy(){
+	public void onDestroy() {
+		super.onDestroy();
 		removeNetworkStatusListener(networkStatusListener);
 	}
 
@@ -134,13 +114,29 @@ public class NewsBrowserActivity extends BaseActivity {
 			}
 
 		});
+		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
+		warningLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				warningLayout.setVisibility(View.INVISIBLE);
+			}
+		});
+
+		networkStatusListener = new NetworkStatusListener() {
+			@Override
+			public void connectionChecked(NetworkStatus status) {
+				if (status == NetworkStatus.OFFLINE) {
+					warningLayout.setVisibility(View.VISIBLE);
+				} else {
+					warningLayout.setVisibility(View.INVISIBLE);
+				}
+			}
+		};
+		addNetworkStatusListener(networkStatusListener);
 	}
 
-	private void logout() {
-		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-		startActivity(intent);
-	}
-
+	
 	private void showFoodMenu() {
 		StringBuilder sbUrl = new StringBuilder();
 		sbUrl.append(getResources().getString(R.string.web_url));
