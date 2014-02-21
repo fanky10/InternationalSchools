@@ -20,7 +20,8 @@
     <string name="hint_username">Usuario</string>
     <string name="hint_password">Contraseña</string>
     <string name="text_submit">INICIAR</string>
-    <string name="text_register">Solicitá tu usuario y contraseña.</string>
+<!-- 	<string name="text_register">Support: <a href="http://www.stackoverflow.com">click here</a></string> -->
+    <string name="text_register">Solicitá tu usuario y contraseña. <a href="#">Click Aquí</a></string>
     <string name="text_no_conection_warn">No hay conexión a Internet</string>
     <string name="text_ask_logout">Está seguro que desea cerrar la sesión?</string>
     <string name="text_confirm_logout">CERRAR SESION</string>
