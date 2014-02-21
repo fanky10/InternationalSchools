@@ -121,13 +121,6 @@ public class NewsBrowserActivity extends BaseActivity {
 
 		});
 		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
-		warningLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				warningLayout.setVisibility(View.INVISIBLE);
-			}
-		});
 
 		networkStatusListener = new NetworkStatusListener() {
 			@Override

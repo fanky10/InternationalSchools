@@ -19,4 +19,10 @@ public class ImagesBrowserActivity extends AbstractBrowserActivity {
 		}
 		webView.loadUrl(imgUrl);
 	}
+
+	@Override
+	protected void configureMenuBar() {
+		// no menu bar
+		
+	}
 }

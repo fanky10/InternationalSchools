@@ -80,6 +80,7 @@ public class LoginActivity extends BaseActivity {
 		editor.commit();
 		
 		startActivity(getLoginSuccessIntent(userId));
+		finish();
 	}
 
 	class AsyncLoginTask extends AsyncTask<Void, Void, String> {

@@ -25,10 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.aenimastudio.nis.activities.LoginActivity" android:noHistory="true"/>
+        <activity android:name="com.aenimastudio.nis.activities.LoginActivity"/>
         <activity android:name="com.aenimastudio.nis.activities.NewsBrowserActivity" />
-        <activity android:name="com.aenimastudio.nis.activities.PDFBrowserActivity" android:noHistory="true"/>
-        <activity android:name="com.aenimastudio.nis.activities.ImagesBrowserActivity" android:noHistory="true"/>
+        <activity android:name="com.aenimastudio.nis.activities.PDFBrowserActivity"/>
+        <activity android:name="com.aenimastudio.nis.activities.ImagesBrowserActivity"/>
     </application>
 
 </manifest>

@@ -19,27 +19,17 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
-            android:src="@drawable/icon_ins_menu" />
+            android:src="@drawable/icon_food" />
 
         <ImageView
-            android:id="@+id/commonMenuLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/btn_ins_logout" />
-
-        <ImageView
-            android:id="@+id/commonMenuFood"
+            android:id="@+id/commonMenuPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/btn_ins_menu" />
+            android:src="@drawable/btn_ins_prev" />
     </RelativeLayout>
 
     <View

@@ -6,7 +6,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.aenimastudio.nis.R;
-import com.aenimastudio.nis.constants.AppConstants;
 
 public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected WebView webView;
@@ -29,10 +28,14 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		webView.setWebViewClient(new WebViewClient());
 		showWebpage();
 	}
-	
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		finish();
+	}
+
 	protected abstract void showWebpage();
 
-	protected void configureMenuBar() {
-		//do nothing for now
-	}
+	protected abstract void configureMenuBar();
 }
