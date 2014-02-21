@@ -15,6 +15,8 @@ public class AppConstants {
 	public static final String SHARED_SETTINGS_USER_ID = "pref_settings_user_id";
 	public static final String SHARED_SETTINGS_MOD_TIME = "pref_settings_mod_time";
 	
+	public static final Integer REQUEST_CODE_MODAL_LOGOUT = 1;
+	
 	
 	// json object keys
 	// here if any

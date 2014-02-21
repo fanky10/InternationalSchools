@@ -2,7 +2,6 @@ package com.aenimastudio.nis.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
@@ -103,10 +102,27 @@ public class NewsBrowserActivity extends BaseActivity {
 		}
 	}
 
+	protected void showLogoutModal() {
+		Intent intent = new Intent(getApplicationContext(), ModalLogoutActivity.class);
+		startActivityForResult(intent, AppConstants.REQUEST_CODE_MODAL_LOGOUT);
+	}
+
 	@Override
 	protected void logout() {
 		super.logout();
 		finish();
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode != AppConstants.REQUEST_CODE_MODAL_LOGOUT) {
+			return;// I dont care.
+		}
+		if (resultCode == RESULT_OK) {
+			logout();
+		}
+		if (resultCode == RESULT_CANCELED) {
+			//do nothing it was the logout modal
+		}
 	}
 
 	@Override
@@ -135,7 +151,7 @@ public class NewsBrowserActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				logout();
+				showLogoutModal();
 			}
 
 		});

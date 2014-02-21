@@ -22,6 +22,8 @@
     <string name="text_submit">INICIAR</string>
     <string name="text_register">Solicitá tu usuario y contraseña.</string>
     <string name="text_no_conection_warn">No hay conexión a Internet</string>
+    <string name="text_ask_logout">Está seguro que desea cerrar la sesión?</string>
+    <string name="text_confirm_logout">CERRAR SESION</string>
     
     <!-- pdf embeded reader -->
     <string name="gdocs_pdf_reader"><![CDATA[http://docs.google.com/gview?embedded=true&url=]]></string>
@@ -41,5 +43,6 @@
     <color name="login_background">@color/home_background</color>
     <color name="intro_background">@color/home_background</color>
     <color name="browser_menu">@color/home_background</color>
+    <color name="btn_logout">@color/browser_menu_separator</color>
 
 </resources>

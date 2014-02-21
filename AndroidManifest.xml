@@ -29,6 +29,7 @@
         <activity android:name="com.aenimastudio.nis.activities.NewsBrowserActivity" />
         <activity android:name="com.aenimastudio.nis.activities.PDFBrowserActivity"/>
         <activity android:name="com.aenimastudio.nis.activities.ImagesBrowserActivity"/>
+        <activity android:name="com.aenimastudio.nis.activities.ModalLogoutActivity" android:theme="@style/Theme.Transparent"/>
     </application>
 
 </manifest>

@@ -36,8 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/bkg_txtloginusuario"
+                android:background="@drawable/bkg_login_txt_usuario"
                 android:ems="10"
+                android:singleLine="true"
                 android:hint="@string/hint_username" >
 
                 <requestFocus />
@@ -48,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtUsername"
-                android:background="@drawable/bkg_txtloginpassword"
+                android:background="@drawable/bkg_login_txt_password"
                 android:ems="10"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword" />
@@ -59,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtPassword"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bkg_btnsubmitlogin"
+                android:background="@drawable/bkg_login_btn_submit"
                 android:text="@string/text_submit"
                 android:textAlignment="center"
                 android:textColor="@android:color/white" />
