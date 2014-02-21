@@ -42,15 +42,16 @@ public class PDFBrowserActivity extends AbstractBrowserActivity {
 			}
 		});
 		
-		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
+		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.srcBrowserWarning);
 		
 		networkStatusListener = new NetworkStatusListener() {
 			@Override
 			public void connectionChecked(NetworkStatus status) {
 				if (status == NetworkStatus.OFFLINE) {
 					warningLayout.setVisibility(View.VISIBLE);
-				} else {
+				} else if(status == NetworkStatus.ONLINE){
 					warningLayout.setVisibility(View.GONE);
+					showWebpage();
 				}
 			}
 		};

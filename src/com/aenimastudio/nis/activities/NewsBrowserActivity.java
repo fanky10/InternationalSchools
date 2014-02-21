@@ -45,7 +45,6 @@ public class NewsBrowserActivity extends BaseActivity {
 		return new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				Log.d(LOG_TAG, "url given! " + url);
 				if (BrowserUrlUtils.isAnImage(url)) {
 					redirectToImageBrowser(url);
 					return true;
@@ -127,8 +126,9 @@ public class NewsBrowserActivity extends BaseActivity {
 			public void connectionChecked(NetworkStatus status) {
 				if (status == NetworkStatus.OFFLINE) {
 					warningLayout.setVisibility(View.VISIBLE);
-				} else {
-					warningLayout.setVisibility(View.INVISIBLE);
+				} else if(status == NetworkStatus.ONLINE){
+					warningLayout.setVisibility(View.GONE);
+					showWebpage();
 				}
 			}
 		};

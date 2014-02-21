@@ -40,7 +40,7 @@
         android:background="@color/browser_menu_separator" />
 
     <LinearLayout
-        android:id="@+id/commonMenuTopWarning"
+        android:id="@+id/srcBrowserWarning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/separator"
