@@ -56,7 +56,7 @@
         android:layout_below="@id/separator"
         android:background="@color/browser_menu_warning"
         android:gravity="center"
-        android:visibility="invisible" >
+        android:visibility="gone" >
 
         <ImageView
             android:id="@+id/commonMenuWarningIcon"
