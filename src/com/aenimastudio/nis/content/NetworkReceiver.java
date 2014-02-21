@@ -10,9 +10,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.aenimastudio.nis.handlers.NetworkStatus;
-import com.aenimastudio.nis.handlers.NetworkStatusListener;
-
 public class NetworkReceiver extends BroadcastReceiver {
 	private static final String TAG = NetworkReceiver.class.getName();
 	private List<NetworkStatusListener> networkStatusListenerList = new ArrayList<NetworkStatusListener>();

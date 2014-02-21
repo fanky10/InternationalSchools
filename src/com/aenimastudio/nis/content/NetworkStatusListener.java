@@ -1,4 +1,4 @@
-package com.aenimastudio.nis.handlers;
+package com.aenimastudio.nis.content;
 
 public interface NetworkStatusListener {
 	public void connectionChecked(NetworkStatus status);

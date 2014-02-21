@@ -14,8 +14,8 @@ import android.widget.LinearLayout;
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.constants.BrowserUrlUtils;
-import com.aenimastudio.nis.handlers.NetworkStatus;
-import com.aenimastudio.nis.handlers.NetworkStatusListener;
+import com.aenimastudio.nis.content.NetworkStatus;
+import com.aenimastudio.nis.content.NetworkStatusListener;
 
 public class NewsBrowserActivity extends BaseActivity {
 	private static final String LOG_TAG = NewsBrowserActivity.class.getName();
@@ -47,14 +47,10 @@ public class NewsBrowserActivity extends BaseActivity {
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				Log.d(LOG_TAG, "url given! " + url);
 				if (BrowserUrlUtils.isAnImage(url)) {
-					Log.d(LOG_TAG, "url is an image!!");
 					redirectToImageBrowser(url);
 					return true;
 				} else if (BrowserUrlUtils.isPDF(url)) {
 					showPDFView(url);
-					return true;
-				} else if (isLoginPage(url)) {
-					showLoginView(null);
 					return true;
 				}
 				view.loadUrl(url);
@@ -64,7 +60,11 @@ public class NewsBrowserActivity extends BaseActivity {
 	}
 
 	private void redirectToImageBrowser(String url) {
-		throw new UnsupportedOperationException("not supported yet");
+		Bundle bundle = new Bundle();
+		bundle.putString(AppConstants.SHARED_IMAGE_URL_KEY, url);
+		Intent intent = new Intent(getApplicationContext(), ImagesBrowserActivity.class);
+		intent.putExtras(bundle);
+		startActivity(intent);
 	}
 
 	protected void showWebpage() {
@@ -83,11 +83,13 @@ public class NewsBrowserActivity extends BaseActivity {
 				.append(getResources().getString(R.string.news_param_user_id)).append("=").append(userId).toString();
 		webView.loadUrl(webPage);
 	}
+
 	@Override
-	protected void logout(){
+	protected void logout() {
 		super.logout();
 		finish();
 	}
+
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
@@ -140,7 +142,6 @@ public class NewsBrowserActivity extends BaseActivity {
 		addNetworkStatusListener(networkStatusListener);
 	}
 
-	
 	private void showFoodMenu() {
 		StringBuilder sbUrl = new StringBuilder();
 		sbUrl.append(getResources().getString(R.string.web_url));

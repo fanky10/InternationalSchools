@@ -1,4 +1,4 @@
-package com.aenimastudio.nis.handlers;
+package com.aenimastudio.nis.content;
 
 public enum NetworkStatus {
 	ONLINE,OFFLINE;

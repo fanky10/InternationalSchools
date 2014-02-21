@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentActivity;
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.content.NetworkReceiver;
-import com.aenimastudio.nis.handlers.NetworkStatusListener;
+import com.aenimastudio.nis.content.NetworkStatusListener;
 
 public abstract class BaseActivity extends FragmentActivity {
 	private String webAppUrl;
@@ -67,17 +67,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		intent.setData(Uri.parse("tel:" + phoneNumber));
 		getApplicationContext().startActivity(intent);
 	}
-
-	protected boolean isLoginPage(String url) {
-		String loginPage = getResources().getString(R.string.login_page);
-		return url.contains(loginPage);
-	}
-
-	protected boolean isLogout(String url) {
-		String loginPage = getResources().getString(R.string.logout_page);
-		return url.contains(loginPage);
-	}
-
+	
 	protected void showLoginView(String errorMessage) {
 		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 		startActivity(intent);

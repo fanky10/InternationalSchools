@@ -28,6 +28,7 @@
         <activity android:name="com.aenimastudio.nis.activities.LoginActivity" android:noHistory="true"/>
         <activity android:name="com.aenimastudio.nis.activities.NewsBrowserActivity" />
         <activity android:name="com.aenimastudio.nis.activities.PDFBrowserActivity" android:noHistory="true"/>
+        <activity android:name="com.aenimastudio.nis.activities.ImagesBrowserActivity" android:noHistory="true"/>
     </application>
 
 </manifest>

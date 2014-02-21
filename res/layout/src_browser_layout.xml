@@ -9,10 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        layout="@layout/news_menu_layout" />
+        layout="@layout/src_browser_menu_layout" />
 
     <WebView
-        android:id="@+id/newsWebView"
+        android:id="@+id/pdfWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
