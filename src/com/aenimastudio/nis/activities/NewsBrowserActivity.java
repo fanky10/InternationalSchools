@@ -9,15 +9,18 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.constants.BrowserUrlUtils;
+import com.aenimastudio.nis.handlers.NetworkStatus;
+import com.aenimastudio.nis.handlers.NetworkStatusListener;
 
 public class NewsBrowserActivity extends BaseActivity {
 	private static final String LOG_TAG = NewsBrowserActivity.class.getName();
-	
-	protected WebView webView;
+	private WebView webView;
+	private NetworkStatusListener networkStatusListener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,27 @@ public class NewsBrowserActivity extends BaseActivity {
 		webView.getSettings().setUseWideViewPort(true);
 		webView.setWebViewClient(getWebViewClient());
 		showWebpage();
+
+		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
+		warningLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				warningLayout.setVisibility(View.INVISIBLE);
+			}
+		});
+
+		networkStatusListener = new NetworkStatusListener() {
+			@Override
+			public void connectionChecked(NetworkStatus status) {
+				if (status == NetworkStatus.OFFLINE) {
+					warningLayout.setVisibility(View.VISIBLE);
+				} else {
+					warningLayout.setVisibility(View.INVISIBLE);
+				}
+			}
+		};
+		addNetworkStatusListener(networkStatusListener);
 	}
 
 	protected WebViewClient getWebViewClient() {
@@ -64,7 +88,6 @@ public class NewsBrowserActivity extends BaseActivity {
 		throw new UnsupportedOperationException("not supported yet");
 	}
 
-
 	protected void showWebpage() {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle == null) {
@@ -75,8 +98,9 @@ public class NewsBrowserActivity extends BaseActivity {
 		if (userId == null || userId < 1) {
 			throw new IllegalArgumentException("This Activity should be intented with a valid userId");
 		}
-		
-		String webPage = new StringBuilder().append(getWebAppUrl()).append(getResources().getString(R.string.news_page)).append("?")
+
+		String webPage = new StringBuilder().append(getWebAppUrl())
+				.append(getResources().getString(R.string.news_page)).append("?")
 				.append(getResources().getString(R.string.news_param_user_id)).append("=").append(userId).toString();
 		webView.loadUrl(webPage);
 	}
@@ -86,7 +110,12 @@ public class NewsBrowserActivity extends BaseActivity {
 		super.onBackPressed();
 	}
 	
-	protected void configureMenuBar() {
+	@Override
+	public void onDestroy(){
+		removeNetworkStatusListener(networkStatusListener);
+	}
+
+	private void configureMenuBar() {
 		ImageView imgFood = (ImageView) findViewById(R.id.commonMenuFood);
 		imgFood.setOnClickListener(new OnClickListener() {
 
