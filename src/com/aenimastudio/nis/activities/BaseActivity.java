@@ -89,7 +89,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		return intent;
 	}
 	
-	protected void logout() {
+	protected Intent getLogoutIntent() {
 		//save data and show news!
 		SharedPreferences.Editor editor = appSettings.edit();
 		editor.remove(AppConstants.SHARED_SETTINGS_NAME);
@@ -100,8 +100,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		// Commit the edits!
 		editor.commit();
 
-		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-		startActivity(intent);
+		return new Intent(getApplicationContext(), LoginActivity.class);
 	}
 
 	public String getWebAppUrl() {

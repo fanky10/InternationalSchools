@@ -1,5 +1,6 @@
 package com.aenimastudio.nis.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.constants.BrowserUrlUtils;
 import com.aenimastudio.nis.content.NetworkStatus;
 import com.aenimastudio.nis.content.NetworkStatusListener;
+import com.aenimastudio.nis.utils.AndroidServicesUtil;
 
 public class NewsBrowserActivity extends BaseActivity {
 	private static final String LOG_TAG = NewsBrowserActivity.class.getName();
@@ -103,14 +105,21 @@ public class NewsBrowserActivity extends BaseActivity {
 	}
 
 	protected void showLogoutModal() {
-		Intent intent = new Intent(getApplicationContext(), ModalLogoutActivity.class);
-		startActivityForResult(intent, AppConstants.REQUEST_CODE_MODAL_LOGOUT);
+		AndroidServicesUtil.getAlertDialogBuilder(this).setIcon(android.R.drawable.ic_dialog_alert)
+				.setTitle(R.string.text_confirm_logout).setMessage(R.string.text_ask_logout)
+				.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						logout();
+					}
+
+				}).setNegativeButton("Cancelar", null).show();
 	}
 
-	@Override
-	protected void logout() {
-		super.logout();
+	private void logout() {
+		Intent intent = getLogoutIntent();
 		finish();
+		startActivity(intent);
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
