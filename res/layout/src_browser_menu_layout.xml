@@ -39,32 +39,12 @@
         android:layout_below="@id/topContainer"
         android:background="@color/browser_menu_separator" />
 
-    <LinearLayout
+    <include
         android:id="@+id/srcBrowserWarning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/separator"
-        android:background="@color/browser_menu_warning"
-        android:gravity="center"
-        android:visibility="gone" >
-
-        <ImageView
-            android:id="@+id/commonMenuWarningIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/icon_alert" />
-
-        <TextView
-            android:id="@+id/commonMenuWarningTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@android:color/white"
-            android:text="@string/text_no_conection_warn" />
-    </LinearLayout>
+        layout="@layout/warning_message_layout"
+        android:visibility="gone" />
 
 </RelativeLayout>

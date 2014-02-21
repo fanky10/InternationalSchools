@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aenimastudio.nis.R;
@@ -53,23 +55,32 @@ public class LoginActivity extends BaseActivity {
 	}
 
 	public void logMeIn(String username, String password) {
+		if(username.isEmpty() || password.isEmpty()){
+			showLoginFailed();
+		}
 		UserForm form = new UserForm(username, password);
 		new AsyncLoginTask(form).execute();
 	}
 
 	private void showErrorMessage(String error) {
-		Toast.makeText(getApplicationContext(), "Error: " + error, Toast.LENGTH_SHORT).show();
+		LinearLayout warningContainer = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
+		TextView txtWarning = (TextView) findViewById(R.id.warningTxt);
+		txtWarning.setText(error);
+		warningContainer.setVisibility(View.VISIBLE);
 	}
 
 	private void showLoginFailed() {
-		showErrorMessage("Usuario o password incorrectos");
+		showErrorMessage(getResources().getString(R.string.login_failed_message));
 	};
 
 	private void showErrorMessage() {
-		showErrorMessage("Por favor trate mas tarde");
+		showErrorMessage(getResources().getString(R.string.login_error_message));
 	}
 	
 	private void loginSuccess(UserForm userForm, Integer userId){
+		
+		Button btnLogin = (Button) findViewById(R.id.btnLogin);
+		btnLogin.setText(R.string.login_launching);
 		//save data and show news!
 		SharedPreferences.Editor editor = appSettings.edit();
 		editor.putString(AppConstants.SHARED_SETTINGS_NAME, userForm.getUsername());
