@@ -12,8 +12,7 @@ import com.aenimastudio.nis.content.NetworkStatus;
 import com.aenimastudio.nis.content.NetworkStatusListener;
 
 public class PDFBrowserActivity extends AbstractBrowserActivity {
-	private NetworkStatusListener networkStatusListener;
-
+	
 	@Override
 	protected void loadWebPage() {
 		Bundle bundle = getIntent().getExtras();
@@ -58,10 +57,5 @@ public class PDFBrowserActivity extends AbstractBrowserActivity {
 		addNetworkStatusListener(networkStatusListener);
 	}
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		removeNetworkStatusListener(networkStatusListener);
-	}
-
+	
 }

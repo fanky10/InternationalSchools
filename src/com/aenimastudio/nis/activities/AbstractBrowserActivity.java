@@ -6,11 +6,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.aenimastudio.nis.R;
+import com.aenimastudio.nis.content.NetworkStatusListener;
 
 public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected WebView webView;
 	private int webViewErrorCode = 0;
 	private boolean pageFinishedLoading = false;
+	protected NetworkStatusListener networkStatusListener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,14 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	public void onBackPressed() {
 		super.onBackPressed();
 		finish();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if(networkStatusListener!=null){
+			removeNetworkStatusListener(networkStatusListener);
+		}
 	}
 
 	protected void reloadPage() {
