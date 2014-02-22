@@ -14,7 +14,7 @@
     <string name="login_field_username">user</string>
     <string name="login_field_password">pass</string>
     <string name="login_failed_message">Usuario y/o contraseña incorrecto</string>
-    <string name="login_error_message">Trate nuevamente más tarde</string>
+    <string name="login_error_message">Servicio momentáneamente no disponible</string>
     <string name="login_launching">Iniciando&#8230;</string>
     <string name="txtUsernameText">northern</string>
     <string name="txtPasswordText">abc123</string>

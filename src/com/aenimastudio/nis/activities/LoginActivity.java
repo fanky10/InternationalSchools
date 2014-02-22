@@ -57,6 +57,7 @@ public class LoginActivity extends BaseActivity {
 	public void logMeIn(String username, String password) {
 		if(username.isEmpty() || password.isEmpty()){
 			showLoginFailed();
+			return ;
 		}
 		UserForm form = new UserForm(username, password);
 		new AsyncLoginTask(form).execute();
