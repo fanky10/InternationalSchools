@@ -13,6 +13,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
@@ -32,6 +32,7 @@ import com.aenimastudio.nis.forms.UserForm;
 import com.aenimastudio.nis.utils.LoginResponseJsonParser;
 
 public class LoginActivity extends BaseActivity {
+	private ProgressDialog ringProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,10 @@ public class LoginActivity extends BaseActivity {
 			showLoginFailed();
 			return ;
 		}
+		String progressTitle = getResources().getString(R.string.login_waiting_server_title);
+		String progressMsg = getResources().getString(R.string.login_waiting_server_msg);
+		ringProgressDialog = ProgressDialog.show(LoginActivity.this, progressTitle, progressMsg, true);
+		ringProgressDialog.setCancelable(false);
 		UserForm form = new UserForm(username, password);
 		new AsyncLoginTask(form).execute();
 	}
@@ -68,6 +73,9 @@ public class LoginActivity extends BaseActivity {
 		TextView txtWarning = (TextView) findViewById(R.id.warningTxt);
 		txtWarning.setText(error);
 		warningContainer.setVisibility(View.VISIBLE);
+		if(ringProgressDialog!=null){
+			ringProgressDialog.dismiss();
+		}
 	}
 
 	private void showLoginFailed() {
@@ -77,11 +85,11 @@ public class LoginActivity extends BaseActivity {
 	private void showErrorMessage() {
 		showErrorMessage(getResources().getString(R.string.login_error_message));
 	}
-	
-	private void loginSuccess(UserForm userForm, Integer userId){
-		
-		Button btnLogin = (Button) findViewById(R.id.btnLogin);
-		btnLogin.setText(R.string.login_launching);
+
+	private void loginSuccess(UserForm userForm, Integer userId) {
+
+		//		Button btnLogin = (Button) findViewById(R.id.btnLogin);
+		//		btnLogin.setText(R.string.login_launching);
 		//save data and show news!
 		SharedPreferences.Editor editor = appSettings.edit();
 		editor.putString(AppConstants.SHARED_SETTINGS_NAME, userForm.getUsername());
@@ -90,8 +98,9 @@ public class LoginActivity extends BaseActivity {
 		editor.putLong(AppConstants.SHARED_SETTINGS_MOD_TIME, System.currentTimeMillis());
 		// Commit the edits!
 		editor.commit();
-		
+
 		startActivity(getLoginSuccessIntent(userId));
+		ringProgressDialog.dismiss();
 		finish();
 	}
 
@@ -139,7 +148,7 @@ public class LoginActivity extends BaseActivity {
 						//bad login
 						showLoginFailed();
 					} else {
-						loginSuccess(userForm,loginResponse.getUserId());
+						loginSuccess(userForm, loginResponse.getUserId());
 					}
 				} catch (JSONException ex) {
 					showErrorMessage();
