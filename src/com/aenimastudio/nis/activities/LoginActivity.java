@@ -18,8 +18,10 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -46,6 +48,19 @@ public class LoginActivity extends BaseActivity {
 		Button btnLogin = (Button) findViewById(R.id.btnLogin);
 		final EditText txtUsername = (EditText) findViewById(R.id.txtUsername);
 		final EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
+		final LinearLayout warningContainer = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
+		OnTouchListener txtTouchedListener = new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				warningContainer.setVisibility(View.GONE);
+				return false;
+			}
+		};
+		
+		txtUsername.setOnTouchListener(txtTouchedListener);
+		txtPassword.setOnTouchListener(txtTouchedListener);
+		
 		btnLogin.setOnClickListener(new OnClickListener() {
 
 			@Override
