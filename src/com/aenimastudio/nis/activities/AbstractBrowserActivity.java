@@ -1,6 +1,7 @@
 package com.aenimastudio.nis.activities;
 
 import android.os.Bundle;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,6 +31,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		webView.getSettings().setSupportZoom(true);
 		webView.getSettings().setUseWideViewPort(true);
 		webView.setWebViewClient(getWebViewClient());
+		webView.setWebChromeClient(new WebChromeClient());
 		loadWebPage();
 	}
 
