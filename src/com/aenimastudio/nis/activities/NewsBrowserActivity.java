@@ -76,13 +76,13 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 	protected void showLogoutModal() {
 		AndroidServicesUtil.getAlertDialogBuilder(this).setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(R.string.text_confirm_logout).setMessage(R.string.text_ask_logout)
-				.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						logout();
 					}
 
-				}).setNegativeButton("Cancelar", null).show();
+				}).setNegativeButton(R.string.dialog_cancel, null).show();
 	}
 
 	private void logout() {
@@ -151,11 +151,8 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 	}
 
 	private void showFoodMenu() {
-		StringBuilder sbUrl = new StringBuilder();
-		sbUrl.append(getResources().getString(R.string.web_url));
-		sbUrl.append(getResources().getString(R.string.web_context));
-		sbUrl.append(getResources().getString(R.string.food_menu_path));
-		showPDFView(sbUrl.toString());
+		Intent intent = new Intent(getApplicationContext(), PDFBrowserActivity.class);
+		startActivity(intent);
 	}
 
 }
