@@ -52,5 +52,14 @@
     <color name="intro_background">@color/home_background</color>
     <color name="browser_menu">@color/home_background</color>
     <color name="btn_logout">@color/browser_menu_separator</color>
+    
+    <string-array name="food_menu_types_map">
+        <item >islands_menu_kinder.pdf|Kinder</item>
+        <item >northern_menu_kinder.pdf|Kinder</item>
+        <item >southern_menu_kinder.pdf|Kinder</item>
+        <item >islands_menu_js.pdf|Junior/Senior</item>
+        <item >northern_menu_js.pdf|Junior/Senior</item>
+        <item >southern_menu_js.pdf|Junior/Senior</item>
+    </string-array>
 
 </resources>
