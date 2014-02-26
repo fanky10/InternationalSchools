@@ -17,7 +17,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.src_browser_layout);
+		setContentView(R.layout.browser_layout);
 		init();
 	}
 
@@ -53,7 +53,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		}
 	}
 
-	private WebViewClient getWebViewClient() {
+	protected WebViewClient getWebViewClient() {
 		return new WebViewClient() {
 			@Override
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
@@ -71,4 +71,36 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected abstract void loadWebPage();
 
 	protected abstract void configureMenuBar();
+
+	public WebView getWebView() {
+		return webView;
+	}
+
+	public void setWebView(WebView webView) {
+		this.webView = webView;
+	}
+
+	public int getWebViewErrorCode() {
+		return webViewErrorCode;
+	}
+
+	public void setWebViewErrorCode(int webViewErrorCode) {
+		this.webViewErrorCode = webViewErrorCode;
+	}
+
+	public boolean isPageFinishedLoading() {
+		return pageFinishedLoading;
+	}
+
+	public void setPageFinishedLoading(boolean pageFinishedLoading) {
+		this.pageFinishedLoading = pageFinishedLoading;
+	}
+
+	public NetworkStatusListener getNetworkStatusListener() {
+		return networkStatusListener;
+	}
+
+	public void setNetworkStatusListener(NetworkStatusListener networkStatusListener) {
+		this.networkStatusListener = networkStatusListener;
+	}
 }

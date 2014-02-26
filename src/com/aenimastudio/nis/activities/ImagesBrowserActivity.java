@@ -32,7 +32,11 @@ public class ImagesBrowserActivity extends AbstractBrowserActivity {
 		ImageView imgIcon = (ImageView) findViewById(R.id.commonMenuIcon);
 		imgIcon.setImageResource(R.drawable.icon_ins_menu);
 		
-		ImageView imgPrev = (ImageView) findViewById(R.id.commonMenuPrev);
+		ImageView logoutIcon = (ImageView) findViewById(R.id.commonMenuRightButton);
+		logoutIcon.setVisibility(View.GONE);
+		
+		ImageView imgPrev = (ImageView) findViewById(R.id.commonMenuLeftButton);
+		imgPrev.setImageResource(R.drawable.btn_ins_prev);
 		imgPrev.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -41,7 +45,7 @@ public class ImagesBrowserActivity extends AbstractBrowserActivity {
 			}
 		});
 
-		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.srcBrowserWarning);
+		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
 		networkStatusListener = new NetworkStatusListener() {
 			@Override
 			public void connectionChecked(NetworkStatus status) {

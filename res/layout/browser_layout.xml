@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        layout="@layout/src_browser_menu_layout" />
+        layout="@layout/browser_menu_layout" />
 
     <WebView
         android:id="@+id/pdfWebView"

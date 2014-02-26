@@ -22,7 +22,7 @@
             android:src="@drawable/icon_ins_menu" />
 
         <ImageView
-            android:id="@+id/commonMenuLogout"
+            android:id="@+id/commonMenuRightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -32,7 +32,7 @@
             android:src="@drawable/btn_ins_logout" />
 
         <ImageView
-            android:id="@+id/commonMenuFood"
+            android:id="@+id/commonMenuLeftButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -45,7 +45,7 @@
     <View
         android:id="@+id/separator"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="1dp"
         android:layout_below="@id/topContainer"
         android:background="@color/browser_menu_separator" />
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -18,33 +17,10 @@ import com.aenimastudio.nis.content.NetworkStatus;
 import com.aenimastudio.nis.content.NetworkStatusListener;
 import com.aenimastudio.nis.utils.AndroidServicesUtil;
 
-public class NewsBrowserActivity extends BaseActivity {
-	private static final String LOG_TAG = NewsBrowserActivity.class.getName();
-	private WebView webView;
-	private NetworkStatusListener networkStatusListener;
-	private int webViewErrorCode = 0;
-	private boolean pageFinishedLoading = false;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.news_layout);
-		init();
-	}
-
-	private void init() {
-		configureMenuBar();
-		webView = (WebView) findViewById(R.id.newsWebView);
-		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
-		webView.getSettings().setJavaScriptEnabled(true);
-		webView.getSettings().setBuiltInZoomControls(true);
-		webView.getSettings().setSupportZoom(true);
-		webView.getSettings().setUseWideViewPort(true);
-		webView.setWebViewClient(getWebViewClient());
-		loadWebPage();
-	}
+public class NewsBrowserActivity extends AbstractBrowserActivity {
 
 	protected WebViewClient getWebViewClient() {
+		final WebViewClient superWVC = super.getWebViewClient();
 		return new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -61,13 +37,12 @@ public class NewsBrowserActivity extends BaseActivity {
 
 			@Override
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-				webViewErrorCode = errorCode;
+				superWVC.onReceivedError(view, errorCode, description, failingUrl);
 			}
 
 			@Override
 			public void onPageFinished(WebView view, String url) {
-				pageFinishedLoading = true;
-				webViewErrorCode = 0;
+				superWVC.onPageFinished(view, url);
 			}
 		};
 	}
@@ -96,12 +71,6 @@ public class NewsBrowserActivity extends BaseActivity {
 				.append(getResources().getString(R.string.news_param_user_id)).append("=").append(userId).toString();
 
 		webView.loadUrl(webPage);
-	}
-
-	private void reloadPage() {
-		if (webViewErrorCode > 0 || !pageFinishedLoading) {
-			loadWebPage();
-		}
 	}
 
 	protected void showLogoutModal() {
@@ -145,8 +114,9 @@ public class NewsBrowserActivity extends BaseActivity {
 		removeNetworkStatusListener(networkStatusListener);
 	}
 
-	private void configureMenuBar() {
-		ImageView imgFood = (ImageView) findViewById(R.id.commonMenuFood);
+	@Override
+	protected void configureMenuBar() {
+		ImageView imgFood = (ImageView) findViewById(R.id.commonMenuLeftButton);
 		imgFood.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -155,7 +125,7 @@ public class NewsBrowserActivity extends BaseActivity {
 			}
 		});
 
-		ImageView imgLogout = (ImageView) findViewById(R.id.commonMenuLogout);
+		ImageView imgLogout = (ImageView) findViewById(R.id.commonMenuRightButton);
 		imgLogout.setOnClickListener(new OnClickListener() {
 
 			@Override
