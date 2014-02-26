@@ -103,8 +103,6 @@ public class LoginActivity extends BaseActivity {
 
 	private void loginSuccess(UserForm userForm, Integer userId) {
 
-		//		Button btnLogin = (Button) findViewById(R.id.btnLogin);
-		//		btnLogin.setText(R.string.login_launching);
 		//save data and show news!
 		SharedPreferences.Editor editor = appSettings.edit();
 		editor.putString(AppConstants.SHARED_SETTINGS_NAME, userForm.getUsername());
@@ -113,9 +111,9 @@ public class LoginActivity extends BaseActivity {
 		editor.putLong(AppConstants.SHARED_SETTINGS_MOD_TIME, System.currentTimeMillis());
 		// Commit the edits!
 		editor.commit();
-
-		startActivity(getLoginSuccessIntent(userId));
+		
 		ringProgressDialog.dismiss();
+		startActivity(getLoginSuccessIntent(userId));
 		finish();
 	}
 
