@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -19,38 +18,19 @@ import com.aenimastudio.nis.utils.AndroidServicesUtil;
 
 public class NewsBrowserActivity extends AbstractBrowserActivity {
 
-	protected WebViewClient getWebViewClient() {
-		final WebViewClient superWVC = super.getWebViewClient();
-		return new WebViewClient() {
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				if (BrowserUrlUtils.isAnImage(url)) {
-					redirectToImageBrowser(url);
-					return true;
-				} else if (BrowserUrlUtils.isPDF(url)) {
-					showPDFView(url);
-					return true;
-				}
-				view.loadUrl(url);
-				return false;
-			}
-
-			@Override
-			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-				superWVC.onReceivedError(view, errorCode, description, failingUrl);
-			}
-
-			@Override
-			public void onPageFinished(WebView view, String url) {
-				superWVC.onPageFinished(view, url);
-			}
-		};
+	protected boolean overrideUrlLoading(WebView view, String url) {
+		if (BrowserUrlUtils.isPDF(url)) {
+			showPDFView(url);
+			return true;
+		}
+		redirectToExternalBrowser(url);
+		return true;
 	}
 
-	private void redirectToImageBrowser(String url) {
+	private void redirectToExternalBrowser(String url) {
 		Bundle bundle = new Bundle();
-		bundle.putString(AppConstants.SHARED_IMAGE_URL_KEY, url);
-		Intent intent = new Intent(getApplicationContext(), ImagesBrowserActivity.class);
+		bundle.putString(AppConstants.SHARED_URL_KEY, url);
+		Intent intent = new Intent(getApplicationContext(), SimpleBrowserActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}
@@ -151,7 +131,7 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 	}
 
 	private void showFoodMenu() {
-		Intent intent = new Intent(getApplicationContext(), PDFBrowserActivity.class);
+		Intent intent = new Intent(getApplicationContext(), FoodMenuBrowserActivity.class);
 		startActivity(intent);
 	}
 

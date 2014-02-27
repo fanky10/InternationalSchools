@@ -13,7 +13,7 @@
         layout="@layout/browser_menu_layout" />
 
     <WebView
-        android:id="@+id/pdfWebView"
+        android:id="@+id/mainWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/browserMenu" />

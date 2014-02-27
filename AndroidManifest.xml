@@ -16,6 +16,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
 
         <!-- launch activity -->
         <activity android:name="com.aenimastudio.nis.activities.SplashNISActivity" android:noHistory="true">
@@ -27,8 +28,8 @@
         </activity>
         <activity android:name="com.aenimastudio.nis.activities.LoginActivity"/>
         <activity android:name="com.aenimastudio.nis.activities.NewsBrowserActivity" />
-        <activity android:name="com.aenimastudio.nis.activities.PDFBrowserActivity"/>
-        <activity android:name="com.aenimastudio.nis.activities.ImagesBrowserActivity"/>
+        <activity android:name="com.aenimastudio.nis.activities.FoodMenuBrowserActivity"/>
+        <activity android:name="com.aenimastudio.nis.activities.SimpleBrowserActivity"/>
         <activity android:name="com.aenimastudio.nis.activities.ModalLogoutActivity" android:theme="@style/Theme.Transparent"/>
     </application>
 

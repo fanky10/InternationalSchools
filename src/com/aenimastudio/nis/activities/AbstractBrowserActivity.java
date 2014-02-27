@@ -16,15 +16,16 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected NetworkStatusListener networkStatusListener;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.browser_layout);
 		init();
+		loadWebPage();
 	}
 
-	private void init() {
+	protected void init() {
 		configureMenuBar();
-		webView = (WebView) findViewById(R.id.pdfWebView);
+		webView = (WebView) findViewById(R.id.mainWebView);
 		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setBuiltInZoomControls(true);
@@ -32,7 +33,6 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		webView.getSettings().setUseWideViewPort(true);
 		webView.setWebViewClient(getWebViewClient());
 		webView.setWebChromeClient(new WebChromeClient());
-		loadWebPage();
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if(networkStatusListener!=null){
+		if (networkStatusListener != null) {
 			removeNetworkStatusListener(networkStatusListener);
 		}
 	}
@@ -57,6 +57,11 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 
 	protected WebViewClient getWebViewClient() {
 		return new WebViewClient() {
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				return overrideUrlLoading(view, url);
+			}
+
 			@Override
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 				webViewErrorCode = errorCode;
@@ -73,6 +78,10 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected abstract void loadWebPage();
 
 	protected abstract void configureMenuBar();
+
+	protected boolean overrideUrlLoading(WebView view, String url) {
+		return false;
+	}
 
 	public WebView getWebView() {
 		return webView;
