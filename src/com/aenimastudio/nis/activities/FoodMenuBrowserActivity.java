@@ -2,7 +2,6 @@ package com.aenimastudio.nis.activities;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,16 +12,6 @@ import com.aenimastudio.nis.content.NetworkStatus;
 import com.aenimastudio.nis.content.NetworkStatusListener;
 
 public class FoodMenuBrowserActivity extends AbstractBrowserActivity {
-
-	protected void init() {
-		super.init();
-		//zoomed out initially -> true
-		webView.getSettings().setLoadWithOverviewMode(true);
-		//will have a normal viewport (like desktop browser) -> false
-		webView.getSettings().setUseWideViewPort(false);
-		webView.getSettings().setBuiltInZoomControls(true);
-		webView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
-	}
 
 	protected boolean overrideUrlLoading(WebView view, String url) {
 		if (BrowserUrlUtils.isPDF(url)) {
