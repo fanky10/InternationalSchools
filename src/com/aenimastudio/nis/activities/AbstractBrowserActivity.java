@@ -22,15 +22,17 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		init();
 		loadWebPage();
 	}
-
+	
+	protected void onResume(){
+		super.onResume();
+		webView.onResume();
+	}
+	
 	protected void init() {
 		configureMenuBar();
 		webView = (WebView) findViewById(R.id.mainWebView);
 		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 		webView.getSettings().setJavaScriptEnabled(true);
-		webView.getSettings().setBuiltInZoomControls(true);
-		webView.getSettings().setSupportZoom(true);
-		webView.getSettings().setUseWideViewPort(true);
 		webView.setWebViewClient(getWebViewClient());
 		webView.setWebChromeClient(new WebChromeClient());
 	}
@@ -38,12 +40,14 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
+		webView.destroy();
 		finish();
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		webView.destroy();
 		if (networkStatusListener != null) {
 			removeNetworkStatusListener(networkStatusListener);
 		}

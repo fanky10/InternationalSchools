@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.aenimastudio.nis.activities.LoginActivity"/>
+        <activity android:name="com.aenimastudio.nis.activities.LoginActivity" android:noHistory="true"/>
         <activity android:name="com.aenimastudio.nis.activities.NewsBrowserActivity" />
         <activity android:name="com.aenimastudio.nis.activities.FoodMenuBrowserActivity"/>
         <activity android:name="com.aenimastudio.nis.activities.SimpleBrowserActivity"/>

@@ -80,7 +80,6 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void showPDFView(String url) {
 		try {
 			Uri path = Uri.parse(url);
-			Log.d(BaseActivity.class.getName(), "url: " + url);
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(path);
 			startActivity(intent);

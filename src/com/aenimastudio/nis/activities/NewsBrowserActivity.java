@@ -19,6 +19,7 @@ import com.aenimastudio.nis.utils.AndroidServicesUtil;
 public class NewsBrowserActivity extends AbstractBrowserActivity {
 
 	protected boolean overrideUrlLoading(WebView view, String url) {
+		webView.onPause();
 		if (BrowserUrlUtils.isPDF(url)) {
 			showPDFView(url);
 			return true;
@@ -54,6 +55,7 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 	}
 
 	protected void showLogoutModal() {
+		webView.onPause();
 		AndroidServicesUtil.getAlertDialogBuilder(this).setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(R.string.text_confirm_logout).setMessage(R.string.text_ask_logout)
 				.setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
@@ -62,7 +64,13 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 						logout();
 					}
 
-				}).setNegativeButton(R.string.dialog_cancel, null).show();
+				}).setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						webView.onResume();
+					}
+
+				}).show();
 	}
 
 	private void logout() {
@@ -131,6 +139,7 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 	}
 
 	private void showFoodMenu() {
+		webView.onPause();
 		Intent intent = new Intent(getApplicationContext(), FoodMenuBrowserActivity.class);
 		startActivity(intent);
 	}
