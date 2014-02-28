@@ -27,6 +27,18 @@ public class NewsBrowserActivity extends AbstractBrowserActivity {
 		redirectToExternalBrowser(url);
 		return true;
 	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		webView.onPause();
+	}
+
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+		// Always call the superclass so it can restore the view hierarchy
+		super.onRestoreInstanceState(savedInstanceState);
+		webView.onResume();
+	}
 
 	private void redirectToExternalBrowser(String url) {
 		Bundle bundle = new Bundle();
