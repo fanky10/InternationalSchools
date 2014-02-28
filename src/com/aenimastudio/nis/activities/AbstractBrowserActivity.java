@@ -33,6 +33,8 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		webView = (WebView) findViewById(R.id.mainWebView);
 		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 		webView.getSettings().setJavaScriptEnabled(true);
+		webView.getSettings().setBuiltInZoomControls(true);
+		webView.getSettings().setSupportZoom(true);
 		webView.setWebViewClient(getWebViewClient());
 		webView.setWebChromeClient(new WebChromeClient());
 	}
