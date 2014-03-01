@@ -49,23 +49,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 			@Override
 			public void toggledFullscreen(boolean fullscreen) {
 				// Your code to handle the full-screen change, for example showing and hiding the title bar. Example:
-				if (fullscreen) {
-					WindowManager.LayoutParams attrs = getWindow().getAttributes();
-					attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-					attrs.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
-					getWindow().setAttributes(attrs);
-					if (android.os.Build.VERSION.SDK_INT >= 14) {
-						getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-					}
-				} else {
-					WindowManager.LayoutParams attrs = getWindow().getAttributes();
-					attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
-					attrs.flags &= ~WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
-					getWindow().setAttributes(attrs);
-					if (android.os.Build.VERSION.SDK_INT >= 14) {
-						getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-					}
-				}
+				// I wont change a thing (:
 
 			}
 		});

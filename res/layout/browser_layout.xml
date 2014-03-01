@@ -31,7 +31,9 @@
     <RelativeLayout
         android:id="@+id/videoLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="gone" >
 
         <!-- View that will be shown while the fullscreen video loads (maybe include a spinner and a "Loading..." message) -->
 

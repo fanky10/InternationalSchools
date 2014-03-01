@@ -192,7 +192,7 @@ public class VideoEnabledWebChromeClient extends WebChromeClient implements OnPr
 
 		if (isVideoFullscreen) {
 			// Hide the video view, remove it, and show the non-video view
-			activityVideoView.setVisibility(View.INVISIBLE);
+			activityVideoView.setVisibility(View.GONE);
 			activityVideoView.removeView(videoViewContainer);
 			activityNonVideoView.setVisibility(View.VISIBLE);
 
