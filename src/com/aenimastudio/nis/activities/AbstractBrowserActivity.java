@@ -3,14 +3,17 @@ package com.aenimastudio.nis.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ScrollView;
 
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.content.NetworkStatusListener;
 import com.aenimastudio.nis.widget.VideoEnabledWebChromeClient;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected WebView webView;
@@ -18,6 +21,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	private boolean pageFinishedLoading = false;
 	protected NetworkStatusListener networkStatusListener;
 	protected VideoEnabledWebChromeClient webChromeClient;
+	protected PullToRefreshScrollView pullToRefreshView;
 
 	@Override
 	protected final void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,17 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 			}
 		});
 		webView.setWebChromeClient(webChromeClient);
+
+		// Set a listener to be invoked when the list should be refreshed.
+		pullToRefreshView = (PullToRefreshScrollView) findViewById(R.id.ptrScrollView);
+		pullToRefreshView.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
+			@Override
+			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+				// Do work to refresh the list here.
+				//				new ReloadWebViewTask().execute();
+				loadWebPage();
+			}
+		});
 	}
 
 	@Override
@@ -93,12 +108,14 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 			@Override
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 				webViewErrorCode = errorCode;
+				pullToRefreshView.onRefreshComplete();
 			}
 
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				pageFinishedLoading = true;
 				webViewErrorCode = 0;
+				pullToRefreshView.onRefreshComplete();
 			}
 		};
 	}
