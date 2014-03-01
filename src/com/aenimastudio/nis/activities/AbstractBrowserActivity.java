@@ -1,19 +1,23 @@
 package com.aenimastudio.nis.activities;
 
 import android.os.Bundle;
-import android.webkit.WebChromeClient;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.content.NetworkStatusListener;
+import com.aenimastudio.nis.widget.VideoEnabledWebChromeClient;
 
 public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected WebView webView;
 	private int webViewErrorCode = 0;
 	private boolean pageFinishedLoading = false;
 	protected NetworkStatusListener networkStatusListener;
+	protected VideoEnabledWebChromeClient webChromeClient;
 
 	@Override
 	protected final void onCreate(Bundle savedInstanceState) {
@@ -22,28 +26,62 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		init();
 		loadWebPage();
 	}
-	
-	protected void onResume(){
+
+	protected void onResume() {
 		super.onResume();
 		webView.onResume();
 	}
-	
+
 	protected void init() {
 		configureMenuBar();
-		webView = (WebView) findViewById(R.id.mainWebView);
+		webView = (WebView) findViewById(R.id.webView);
 		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setBuiltInZoomControls(true);
 		webView.getSettings().setSupportZoom(true);
 		webView.setWebViewClient(getWebViewClient());
-		webView.setWebChromeClient(new WebChromeClient());
+		// Initialize the VideoEnabledWebChromeClient and set event handlers
+		View nonVideoLayout = findViewById(R.id.nonVideoLayout); // Your own view, read class comments
+		ViewGroup videoLayout = (ViewGroup) findViewById(R.id.videoLayout); // Your own view, read class comments
+		View loadingView = null;//getLayoutInflater().inflate(R.layout.view_loading_video, null); // Your own view, read class comments
+		webChromeClient = new VideoEnabledWebChromeClient(nonVideoLayout, videoLayout, loadingView, webView);
+		webChromeClient.setOnToggledFullscreen(new VideoEnabledWebChromeClient.ToggledFullscreenCallback() {
+			@Override
+			public void toggledFullscreen(boolean fullscreen) {
+				// Your code to handle the full-screen change, for example showing and hiding the title bar. Example:
+				if (fullscreen) {
+					WindowManager.LayoutParams attrs = getWindow().getAttributes();
+					attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+					attrs.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+					getWindow().setAttributes(attrs);
+					if (android.os.Build.VERSION.SDK_INT >= 14) {
+						getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+					}
+				} else {
+					WindowManager.LayoutParams attrs = getWindow().getAttributes();
+					attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+					attrs.flags &= ~WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+					getWindow().setAttributes(attrs);
+					if (android.os.Build.VERSION.SDK_INT >= 14) {
+						getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+					}
+				}
+
+			}
+		});
+		webView.setWebChromeClient(webChromeClient);
 	}
 
 	@Override
 	public void onBackPressed() {
-		super.onBackPressed();
-		webView.destroy();
-		finish();
+
+		// Notify the VideoEnabledWebChromeClient, and handle it ourselves if it doesn't handle it
+		if (!webChromeClient.onBackPressed()) {
+			webView.destroy();
+			finish();
+			super.onBackPressed();
+		}
+
 	}
 
 	@Override
