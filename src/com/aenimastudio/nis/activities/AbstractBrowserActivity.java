@@ -1,12 +1,12 @@
 package com.aenimastudio.nis.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ScrollView;
 
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.content.NetworkStatusListener;
@@ -14,7 +14,6 @@ import com.aenimastudio.nis.widget.PullToRefreshDestroyableWebView;
 import com.aenimastudio.nis.widget.VideoEnabledWebChromeClient;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected WebView webView;
@@ -83,6 +82,15 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 			super.onBackPressed();
 		}
 
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		Log.d(LoginActivity.class.getName(), "saved intance!!");
+		if (webChromeClient != null) {
+			webChromeClient.onBackPressed();
+		}
 	}
 
 	@Override
