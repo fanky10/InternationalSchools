@@ -27,6 +27,7 @@
     <string name="text_confirm_logout">CERRAR SESION</string>
     <string name="login_waiting_server_title">Por favor espere&#8230;</string>
     <string name="login_waiting_server_msg">Consultando datos servidor</string>
+    <string name="webview_error_page"><![CDATA[<html><h1>Error al cargar la página, vuelva a intentarlo más tarde</h1></html>]]></string>
     
     <!-- pdf embeded reader -->
     <string name="gdocs_pdf_reader"><![CDATA[http://docs.google.com/gview?embedded=true&url=]]></string>

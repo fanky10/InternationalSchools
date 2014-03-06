@@ -75,7 +75,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	public void onBackPressed() {
 
 		// Notify the VideoEnabledWebChromeClient, and handle it ourselves if it doesn't handle it
-		if (webChromeClient==null || !webChromeClient.onBackPressed()) {
+		if (webChromeClient == null || !webChromeClient.onBackPressed()) {
 			webView.destroy();
 			finish();
 			super.onBackPressed();
@@ -108,6 +108,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 			@Override
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 				webViewErrorCode = errorCode;
+				showErrorPage(view);
 				refreshComplete();
 			}
 
@@ -119,9 +120,15 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 			}
 		};
 	}
-	
-	private void refreshComplete(){
-		if(pullToRefreshView!=null){
+
+	private void showErrorPage(WebView view) {
+		String webViewErrorPageHtml = getResources().getString(R.string.webview_error_page);
+		view.stopLoading();
+		view.loadData(webViewErrorPageHtml, "text/html; charset=UTF-8", null);
+	}
+
+	private void refreshComplete() {
+		if (pullToRefreshView != null) {
 			pullToRefreshView.onRefreshComplete();
 		}
 	}
