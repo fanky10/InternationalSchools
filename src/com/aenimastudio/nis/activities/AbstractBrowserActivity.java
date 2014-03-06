@@ -24,7 +24,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	protected PullToRefreshScrollView pullToRefreshView;
 
 	@Override
-	protected final void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.browser_layout);
 		init();
@@ -75,7 +75,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	public void onBackPressed() {
 
 		// Notify the VideoEnabledWebChromeClient, and handle it ourselves if it doesn't handle it
-		if (!webChromeClient.onBackPressed()) {
+		if (webChromeClient==null || !webChromeClient.onBackPressed()) {
 			webView.destroy();
 			finish();
 			super.onBackPressed();
@@ -108,16 +108,22 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 			@Override
 			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 				webViewErrorCode = errorCode;
-				pullToRefreshView.onRefreshComplete();
+				refreshComplete();
 			}
 
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				pageFinishedLoading = true;
 				webViewErrorCode = 0;
-				pullToRefreshView.onRefreshComplete();
+				refreshComplete();
 			}
 		};
+	}
+	
+	private void refreshComplete(){
+		if(pullToRefreshView!=null){
+			pullToRefreshView.onRefreshComplete();
+		}
 	}
 
 	protected abstract void loadWebPage();

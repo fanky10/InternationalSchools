@@ -11,8 +11,8 @@ import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.content.NetworkStatus;
 import com.aenimastudio.nis.content.NetworkStatusListener;
 
-public class SimpleBrowserActivity extends AbstractBrowserActivity {
-
+public class SimpleBrowserActivity extends MinBrowserActivity {
+	
 	@Override
 	protected void loadWebPage() {
 		Bundle bundle = getIntent().getExtras();

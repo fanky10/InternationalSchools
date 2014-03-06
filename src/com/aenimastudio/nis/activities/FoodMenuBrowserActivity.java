@@ -11,7 +11,7 @@ import com.aenimastudio.nis.constants.BrowserUrlUtils;
 import com.aenimastudio.nis.content.NetworkStatus;
 import com.aenimastudio.nis.content.NetworkStatusListener;
 
-public class FoodMenuBrowserActivity extends AbstractBrowserActivity {
+public class FoodMenuBrowserActivity extends MinBrowserActivity {
 
 	protected boolean overrideUrlLoading(WebView view, String url) {
 		if (BrowserUrlUtils.isPDF(url)) {
