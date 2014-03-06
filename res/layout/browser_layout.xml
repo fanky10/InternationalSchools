@@ -20,17 +20,11 @@
             android:layout_alignParentTop="true"
             layout="@layout/browser_menu_layout" />
 
-        <com.handmark.pulltorefresh.library.PullToRefreshScrollView
-            android:id="@+id/ptrScrollView"
+        <com.aenimastudio.nis.widget.PullToRefreshDestroyableWebView
+            android:id="@+id/ptrWebView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/browserMenu" >
-
-            <com.aenimastudio.nis.widget.DestroyableWebView
-                android:id="@+id/webView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+            android:layout_below="@id/browserMenu" />
     </RelativeLayout>
     <!-- View where the video will be shown when video goes fullscreen -->
 

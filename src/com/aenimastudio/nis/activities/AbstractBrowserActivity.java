@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.content.NetworkStatusListener;
+import com.aenimastudio.nis.widget.PullToRefreshDestroyableWebView;
 import com.aenimastudio.nis.widget.VideoEnabledWebChromeClient;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -21,7 +22,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 	private boolean pageFinishedLoading = false;
 	protected NetworkStatusListener networkStatusListener;
 	protected VideoEnabledWebChromeClient webChromeClient;
-	protected PullToRefreshScrollView pullToRefreshView;
+	protected PullToRefreshDestroyableWebView pullToRefreshView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,18 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 
 	protected void init() {
 		configureMenuBar();
-		webView = (WebView) findViewById(R.id.webView);
+
+		// Set a listener to be invoked when the list should be refreshed.
+		pullToRefreshView = (PullToRefreshDestroyableWebView) findViewById(R.id.ptrWebView);
+		pullToRefreshView.setOnRefreshListener(new OnRefreshListener<WebView>() {
+			@Override
+			public void onRefresh(PullToRefreshBase<WebView> refreshView) {
+				// Do work to refresh the list here.
+				loadWebPage();
+			}
+		});
+
+		webView = pullToRefreshView.getRefreshableView();
 		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setBuiltInZoomControls(true);
@@ -59,16 +71,6 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 		});
 		webView.setWebChromeClient(webChromeClient);
 
-		// Set a listener to be invoked when the list should be refreshed.
-		pullToRefreshView = (PullToRefreshScrollView) findViewById(R.id.ptrScrollView);
-		pullToRefreshView.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
-			@Override
-			public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-				// Do work to refresh the list here.
-				//				new ReloadWebViewTask().execute();
-				loadWebPage();
-			}
-		});
 	}
 
 	@Override
