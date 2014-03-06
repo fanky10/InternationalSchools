@@ -74,7 +74,7 @@ public class PullToRefreshDestroyableWebView extends com.handmark.pulltorefresh.
 		}
 
 		private int getScrollRange() {
-			return (int) Math.max(0, FloatMath.floor(mRefreshableView.getContentHeight() * mRefreshableView.getScale())
+			return (int) Math.max(0, FloatMath.floor(getRefreshableView().getContentHeight() * getRefreshableView().getScale())
 					- (getHeight() - getPaddingBottom() - getPaddingTop()));
 		}
 	}
