@@ -1,7 +1,6 @@
 package com.aenimastudio.nis.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -82,15 +81,6 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
 			super.onBackPressed();
 		}
 
-	}
-	
-	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
-		super.onSaveInstanceState(savedInstanceState);
-		Log.d(LoginActivity.class.getName(), "saved intance!!");
-		if (webChromeClient != null) {
-			webChromeClient.onBackPressed();
-		}
 	}
 
 	@Override
