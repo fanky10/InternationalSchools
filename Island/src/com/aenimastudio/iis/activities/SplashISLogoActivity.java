@@ -7,7 +7,7 @@ import android.view.View;
 import com.aenimastudio.iis.R;
 import com.aenimastudio.iis.constants.AppConstants;
 
-public class SplashNISActivity extends SplashActivity {
+public class SplashISLogoActivity extends SplashActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class SplashNISActivity extends SplashActivity {
 		if(userId>0){
 			return getLoginSuccessIntent(userId);
 		}
-		return new Intent(SplashNISActivity.this, LoginActivity.class);
+		return new Intent(SplashISLogoActivity.this, LoginActivity.class);
 	}
 
 	@Override

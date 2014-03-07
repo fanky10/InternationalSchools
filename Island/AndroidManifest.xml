@@ -20,7 +20,7 @@
 
         <!-- launch activity -->
         <activity
-            android:name="com.aenimastudio.iis.activities.SplashNISActivity"
+            android:name="com.aenimastudio.iis.activities.SplashISLogoActivity"
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

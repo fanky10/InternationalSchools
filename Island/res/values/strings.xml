@@ -1,9 +1,9 @@
 <resources>
 
-    <string name="app_name">IslandInternationalSchool</string>
+    <string name="app_name">IslandsInternationalSchool</string>
     <string name="web_url">http://ismobileapp.com</string>
     <string name="web_context">/international_schools</string>
-    <string name="web_app_context">/northern-school</string>
+    <string name="web_app_context">/islands-school</string>
     
     <!-- static across apps -->
     <string name="login_page">/login.php</string>
