@@ -1,6 +1,8 @@
 package com.aenimastudio.nis.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -8,11 +10,13 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.aenimastudio.nis.R;
 import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.content.NetworkReceiver;
 import com.aenimastudio.nis.content.NetworkStatusListener;
+import com.aenimastudio.nis.utils.AndroidServicesUtil;
 
 public abstract class BaseActivity extends FragmentActivity {
 	private String webAppUrl;
@@ -67,17 +71,37 @@ public abstract class BaseActivity extends FragmentActivity {
 		intent.setData(Uri.parse("tel:" + phoneNumber));
 		getApplicationContext().startActivity(intent);
 	}
-	
+
 	protected void showLoginView(String errorMessage) {
 		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 		startActivity(intent);
 	}
 
 	protected void showPDFView(String url) {
-		Bundle bundle = new Bundle();
-		bundle.putString(AppConstants.SHARED_PDF_URL_KEY, url);
-		Intent intent = new Intent(getApplicationContext(), PDFBrowserActivity.class);
-		intent.putExtras(bundle);
+		try {
+			Uri path = Uri.parse(url);
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(path);
+			startActivity(intent);
+		} catch (ActivityNotFoundException ex) {
+			final String adobeReaderApp = getResources().getString(R.string.pdf_default_app);
+			AndroidServicesUtil.getAlertDialogBuilder(this).setIcon(android.R.drawable.ic_dialog_alert)
+					.setTitle(R.string.pdf_alert_title).setMessage(R.string.pdf_alert_msg)
+					.setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							showMarket(adobeReaderApp);
+						}
+
+					}).setNegativeButton(R.string.dialog_cancel, null).show();
+
+		}
+	}
+
+	protected void showMarket(String app) {
+		String marketUri = "market://details?id=" + app;
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(marketUri));
 		startActivity(intent);
 	}
 
@@ -88,7 +112,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		intent.putExtras(bundle);
 		return intent;
 	}
-	
+
 	protected Intent getLogoutIntent() {
 		//save data and show news!
 		SharedPreferences.Editor editor = appSettings.edit();
@@ -96,7 +120,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		editor.remove(AppConstants.SHARED_SETTINGS_PASSWORD);
 		editor.remove(AppConstants.SHARED_SETTINGS_USER_ID);
 		editor.remove(AppConstants.SHARED_SETTINGS_MOD_TIME);
-		
+
 		// Commit the edits!
 		editor.commit();
 

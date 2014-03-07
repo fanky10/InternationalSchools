@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aenimastudio.nis"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.5-RC2" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -18,18 +18,26 @@
         android:theme="@style/AppTheme" >
 
         <!-- launch activity -->
-        <activity android:name="com.aenimastudio.nis.activities.SplashNISActivity" android:noHistory="true">
+        <activity
+            android:name="com.aenimastudio.nis.activities.SplashNISActivity"
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.aenimastudio.nis.activities.LoginActivity"/>
-        <activity android:name="com.aenimastudio.nis.activities.NewsBrowserActivity" />
-        <activity android:name="com.aenimastudio.nis.activities.PDFBrowserActivity"/>
-        <activity android:name="com.aenimastudio.nis.activities.ImagesBrowserActivity"/>
-        <activity android:name="com.aenimastudio.nis.activities.ModalLogoutActivity" android:theme="@style/Theme.Transparent"/>
+        <activity
+            android:name="com.aenimastudio.nis.activities.LoginActivity"
+            android:noHistory="true" />
+        <activity
+            android:name="com.aenimastudio.nis.activities.NewsBrowserActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name="com.aenimastudio.nis.activities.FoodMenuBrowserActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name="com.aenimastudio.nis.activities.SimpleBrowserActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

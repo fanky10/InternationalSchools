@@ -4,12 +4,12 @@
     <string name="web_url">http://ismobileapp.com</string>
     <string name="web_context">/international_schools</string>
     <string name="web_app_context">/northern-school</string>
-    <string name="food_menu_path">/archivos/northern_menu.pdf</string>
     
     <!-- static across apps -->
     <string name="login_page">/login.php</string>
     <string name="logout_page">/logout.php</string>
     <string name="news_page">/news.php</string>
+    <string name="food_menu_page">/menu.php</string>
     <string name="news_param_user_id">id_usuario</string>
     <string name="login_field_username">user</string>
     <string name="login_field_password">pass</string>
@@ -27,10 +27,16 @@
     <string name="text_confirm_logout">CERRAR SESION</string>
     <string name="login_waiting_server_title">Por favor espere&#8230;</string>
     <string name="login_waiting_server_msg">Consultando datos servidor</string>
+    <string name="webview_error_page"><![CDATA[<html><h1>Error al cargar la página, vuelva a intentarlo más tarde</h1></html>]]></string>
     
     <!-- pdf embeded reader -->
     <string name="gdocs_pdf_reader"><![CDATA[http://docs.google.com/gview?embedded=true&url=]]></string>
-
+	<string name="pdf_alert_title">Sin lector PDF</string>
+	<string name="pdf_alert_msg">No se han encontrado lectores PDF disponibles. Desea descargar uno?</string>
+	<string name="pdf_default_app">com.adobe.reader</string>
+	<string name="dialog_accept">Aceptar</string>
+	<string name="dialog_cancel">Cancelar</string>
+	
     <!-- integer configuration -->
     <integer name="intro_display_length">1500</integer>
     <integer name="check_connection_delay">30000</integer>
@@ -47,5 +53,14 @@
     <color name="intro_background">@color/home_background</color>
     <color name="browser_menu">@color/home_background</color>
     <color name="btn_logout">@color/browser_menu_separator</color>
+    
+    <string-array name="food_menu_types_map">
+        <item >islands_menu_kinder.pdf|Kinder</item>
+        <item >northern_menu_kinder.pdf|Kinder</item>
+        <item >southern_menu_kinder.pdf|Kinder</item>
+        <item >islands_menu_js.pdf|Junior/Senior</item>
+        <item >northern_menu_js.pdf|Junior/Senior</item>
+        <item >southern_menu_js.pdf|Junior/Senior</item>
+    </string-array>
 
 </resources>

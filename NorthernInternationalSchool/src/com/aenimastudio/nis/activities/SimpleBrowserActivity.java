@@ -11,15 +11,15 @@ import com.aenimastudio.nis.constants.AppConstants;
 import com.aenimastudio.nis.content.NetworkStatus;
 import com.aenimastudio.nis.content.NetworkStatusListener;
 
-public class ImagesBrowserActivity extends AbstractBrowserActivity {
-
+public class SimpleBrowserActivity extends MinBrowserActivity {
+	
 	@Override
 	protected void loadWebPage() {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle == null) {
 			throw new IllegalArgumentException("This Activity should be intented with a bundle object");
 		}
-		String imgUrl = bundle.getString(AppConstants.SHARED_IMAGE_URL_KEY);
+		String imgUrl = bundle.getString(AppConstants.SHARED_URL_KEY);
 		if (imgUrl == null || imgUrl.isEmpty()) {
 			throw new IllegalArgumentException("This Activity should be intented with a valid image url");
 		}
@@ -32,7 +32,11 @@ public class ImagesBrowserActivity extends AbstractBrowserActivity {
 		ImageView imgIcon = (ImageView) findViewById(R.id.commonMenuIcon);
 		imgIcon.setImageResource(R.drawable.icon_ins_menu);
 		
-		ImageView imgPrev = (ImageView) findViewById(R.id.commonMenuPrev);
+		ImageView logoutIcon = (ImageView) findViewById(R.id.commonMenuRightButton);
+		logoutIcon.setVisibility(View.GONE);
+		
+		ImageView imgPrev = (ImageView) findViewById(R.id.commonMenuLeftButton);
+		imgPrev.setImageResource(R.drawable.btn_ins_prev);
 		imgPrev.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -41,7 +45,7 @@ public class ImagesBrowserActivity extends AbstractBrowserActivity {
 			}
 		});
 
-		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.srcBrowserWarning);
+		final LinearLayout warningLayout = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
 		networkStatusListener = new NetworkStatusListener() {
 			@Override
 			public void connectionChecked(NetworkStatus status) {

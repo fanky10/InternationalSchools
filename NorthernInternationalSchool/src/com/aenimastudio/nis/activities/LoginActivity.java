@@ -43,6 +43,28 @@ public class LoginActivity extends BaseActivity {
 		init();
 	}
 
+	@Override
+	public void onStop() {
+		super.onStop();
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		Log.d(LoginActivity.class.getName(), "saved intance!!");
+		if(ringProgressDialog!=null){
+			ringProgressDialog.dismiss();
+		}
+	}
+
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+		// Always call the superclass so it can restore the view hierarchy
+		super.onRestoreInstanceState(savedInstanceState);
+		if(ringProgressDialog!=null){
+			ringProgressDialog.show();
+		}
+	}
+
 	private void init() {
 
 		Button btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -50,17 +72,17 @@ public class LoginActivity extends BaseActivity {
 		final EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
 		final LinearLayout warningContainer = (LinearLayout) findViewById(R.id.commonMenuTopWarning);
 		OnTouchListener txtTouchedListener = new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				warningContainer.setVisibility(View.GONE);
 				return false;
 			}
 		};
-		
+
 		txtUsername.setOnTouchListener(txtTouchedListener);
 		txtPassword.setOnTouchListener(txtTouchedListener);
-		
+
 		btnLogin.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -71,9 +93,9 @@ public class LoginActivity extends BaseActivity {
 	}
 
 	public void logMeIn(String username, String password) {
-		if(username.isEmpty() || password.isEmpty()){
+		if (username.isEmpty() || password.isEmpty()) {
 			showLoginFailed();
-			return ;
+			return;
 		}
 		String progressTitle = getResources().getString(R.string.login_waiting_server_title);
 		String progressMsg = getResources().getString(R.string.login_waiting_server_msg);
@@ -88,7 +110,7 @@ public class LoginActivity extends BaseActivity {
 		TextView txtWarning = (TextView) findViewById(R.id.warningTxt);
 		txtWarning.setText(error);
 		warningContainer.setVisibility(View.VISIBLE);
-		if(ringProgressDialog!=null){
+		if (ringProgressDialog != null) {
 			ringProgressDialog.dismiss();
 		}
 	}
@@ -103,8 +125,6 @@ public class LoginActivity extends BaseActivity {
 
 	private void loginSuccess(UserForm userForm, Integer userId) {
 
-		//		Button btnLogin = (Button) findViewById(R.id.btnLogin);
-		//		btnLogin.setText(R.string.login_launching);
 		//save data and show news!
 		SharedPreferences.Editor editor = appSettings.edit();
 		editor.putString(AppConstants.SHARED_SETTINGS_NAME, userForm.getUsername());
@@ -114,8 +134,8 @@ public class LoginActivity extends BaseActivity {
 		// Commit the edits!
 		editor.commit();
 
-		startActivity(getLoginSuccessIntent(userId));
 		ringProgressDialog.dismiss();
+		startActivity(getLoginSuccessIntent(userId));
 		finish();
 	}
 

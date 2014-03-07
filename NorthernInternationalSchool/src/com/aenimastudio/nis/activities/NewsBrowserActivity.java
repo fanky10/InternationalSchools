@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -18,64 +16,34 @@ import com.aenimastudio.nis.content.NetworkStatus;
 import com.aenimastudio.nis.content.NetworkStatusListener;
 import com.aenimastudio.nis.utils.AndroidServicesUtil;
 
-public class NewsBrowserActivity extends BaseActivity {
-	private static final String LOG_TAG = NewsBrowserActivity.class.getName();
-	private WebView webView;
-	private NetworkStatusListener networkStatusListener;
-	private int webViewErrorCode = 0;
-	private boolean pageFinishedLoading = false;
+public class NewsBrowserActivity extends AbstractBrowserActivity {
 
+	protected boolean overrideUrlLoading(WebView view, String url) {
+		webView.onPause();
+		if (BrowserUrlUtils.isPDF(url)) {
+			showPDFView(url);
+			return true;
+		}
+		redirectToExternalBrowser(url);
+		return true;
+	}
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.news_layout);
-		init();
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		webView.onPause();
 	}
 
-	private void init() {
-		configureMenuBar();
-		webView = (WebView) findViewById(R.id.newsWebView);
-		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
-		webView.getSettings().setJavaScriptEnabled(true);
-		webView.getSettings().setBuiltInZoomControls(true);
-		webView.getSettings().setSupportZoom(true);
-		webView.getSettings().setUseWideViewPort(true);
-		webView.setWebViewClient(getWebViewClient());
-		loadWebPage();
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+		// Always call the superclass so it can restore the view hierarchy
+		super.onRestoreInstanceState(savedInstanceState);
+		webView.onResume();
 	}
 
-	protected WebViewClient getWebViewClient() {
-		return new WebViewClient() {
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				if (BrowserUrlUtils.isAnImage(url)) {
-					redirectToImageBrowser(url);
-					return true;
-				} else if (BrowserUrlUtils.isPDF(url)) {
-					showPDFView(url);
-					return true;
-				}
-				view.loadUrl(url);
-				return false;
-			}
-
-			@Override
-			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-				webViewErrorCode = errorCode;
-			}
-
-			@Override
-			public void onPageFinished(WebView view, String url) {
-				pageFinishedLoading = true;
-				webViewErrorCode = 0;
-			}
-		};
-	}
-
-	private void redirectToImageBrowser(String url) {
+	private void redirectToExternalBrowser(String url) {
 		Bundle bundle = new Bundle();
-		bundle.putString(AppConstants.SHARED_IMAGE_URL_KEY, url);
-		Intent intent = new Intent(getApplicationContext(), ImagesBrowserActivity.class);
+		bundle.putString(AppConstants.SHARED_URL_KEY, url);
+		Intent intent = new Intent(getApplicationContext(), SimpleBrowserActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}
@@ -98,22 +66,23 @@ public class NewsBrowserActivity extends BaseActivity {
 		webView.loadUrl(webPage);
 	}
 
-	private void reloadPage() {
-		if (webViewErrorCode > 0 || !pageFinishedLoading) {
-			loadWebPage();
-		}
-	}
-
 	protected void showLogoutModal() {
+		webView.onPause();
 		AndroidServicesUtil.getAlertDialogBuilder(this).setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(R.string.text_confirm_logout).setMessage(R.string.text_ask_logout)
-				.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						logout();
 					}
 
-				}).setNegativeButton("Cancelar", null).show();
+				}).setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						webView.onResume();
+					}
+
+				}).show();
 	}
 
 	private void logout() {
@@ -145,8 +114,9 @@ public class NewsBrowserActivity extends BaseActivity {
 		removeNetworkStatusListener(networkStatusListener);
 	}
 
-	private void configureMenuBar() {
-		ImageView imgFood = (ImageView) findViewById(R.id.commonMenuFood);
+	@Override
+	protected void configureMenuBar() {
+		ImageView imgFood = (ImageView) findViewById(R.id.commonMenuLeftButton);
 		imgFood.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -155,7 +125,7 @@ public class NewsBrowserActivity extends BaseActivity {
 			}
 		});
 
-		ImageView imgLogout = (ImageView) findViewById(R.id.commonMenuLogout);
+		ImageView imgLogout = (ImageView) findViewById(R.id.commonMenuRightButton);
 		imgLogout.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -181,11 +151,9 @@ public class NewsBrowserActivity extends BaseActivity {
 	}
 
 	private void showFoodMenu() {
-		StringBuilder sbUrl = new StringBuilder();
-		sbUrl.append(getResources().getString(R.string.web_url));
-		sbUrl.append(getResources().getString(R.string.web_context));
-		sbUrl.append(getResources().getString(R.string.food_menu_path));
-		showPDFView(sbUrl.toString());
+		webView.onPause();
+		Intent intent = new Intent(getApplicationContext(), FoodMenuBrowserActivity.class);
+		startActivity(intent);
 	}
 
 }
