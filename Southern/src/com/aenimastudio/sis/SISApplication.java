@@ -3,7 +3,7 @@ package com.aenimastudio.sis;
 import android.app.Application;
 
 
-public class IISApplication extends Application {
+public class SISApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
