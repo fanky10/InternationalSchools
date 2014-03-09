@@ -19,6 +19,14 @@ public abstract class SplashActivity extends BaseActivity implements Runnable {
 		postDelayed();
 		addClickeableContainer();
 	}
+	
+	@Override
+	public void onStop(){
+		super.onStop();
+		//prevents from the delayHandler thread start the following activity
+		delayHandler.removeCallbacks(this);
+		finish();
+	}
 
 	private void addClickeableContainer() {
 		View container = getContainer();
