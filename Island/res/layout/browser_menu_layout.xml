@@ -47,14 +47,15 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/topContainer"
-        android:background="@color/browser_menu_separator" />
+        android:background="@color/browser_menu_separator"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/commonMenuTopWarning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/separator"
-        layout="@layout/warning_message_layout" 
-        android:visibility="gone"/>
+        layout="@layout/warning_message_layout"
+        android:visibility="gone" />
 
 </RelativeLayout>
