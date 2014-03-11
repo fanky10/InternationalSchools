@@ -13,28 +13,40 @@ import com.aenimastudio.iis.content.NetworkStatusListener;
 
 public class SimpleBrowserActivity extends MinBrowserActivity {
 	
+	protected void init() {
+		super.init();
+		webView.getSettings().setUseWideViewPort(true);
+		webView.getSettings().setLoadWithOverviewMode(true);
+	}
+
 	@Override
 	protected void loadWebPage() {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle == null) {
 			throw new IllegalArgumentException("This Activity should be intented with a bundle object");
 		}
-		String imgUrl = bundle.getString(AppConstants.SHARED_URL_KEY);
-		if (imgUrl == null || imgUrl.isEmpty()) {
-			throw new IllegalArgumentException("This Activity should be intented with a valid image url");
+		String sharedUrl = bundle.getString(AppConstants.SHARED_URL_KEY);
+		if (sharedUrl == null || sharedUrl.isEmpty()) {
+			throw new IllegalArgumentException("This Activity should be intented with a valid url");
 		}
-		webView.loadUrl(imgUrl);
+		if (sharedUrl.endsWith(".png") || sharedUrl.endsWith(".jpg") || sharedUrl.endsWith(".jpeg")) {
+			String html = "<body ><img style='width:100%;' id=\"resizeImage\" src=\"${picture}\" alt=\"an image\" /></body>";
+			html = html.replace("${picture}", sharedUrl);
+			webView.loadData(html, "text/html; charset=UTF-8", null);
+			return;
+		}
+		webView.loadUrl(sharedUrl);
 	}
 
 	@Override
 	protected void configureMenuBar() {
-		
+
 		ImageView imgIcon = (ImageView) findViewById(R.id.commonMenuIcon);
 		imgIcon.setImageResource(R.drawable.icon_ins_menu);
-		
+
 		ImageView logoutIcon = (ImageView) findViewById(R.id.commonMenuRightButton);
 		logoutIcon.setVisibility(View.GONE);
-		
+
 		ImageView imgPrev = (ImageView) findViewById(R.id.commonMenuLeftButton);
 		imgPrev.setImageResource(R.drawable.btn_ins_prev);
 		imgPrev.setOnClickListener(new OnClickListener() {
