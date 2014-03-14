@@ -17,6 +17,8 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,7 +54,7 @@ public class LoginActivity extends BaseActivity {
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
 		Log.d(LoginActivity.class.getName(), "saved intance!!");
-		if(ringProgressDialog!=null){
+		if (ringProgressDialog != null) {
 			ringProgressDialog.dismiss();
 		}
 	}
@@ -60,7 +62,7 @@ public class LoginActivity extends BaseActivity {
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		// Always call the superclass so it can restore the view hierarchy
 		super.onRestoreInstanceState(savedInstanceState);
-		if(ringProgressDialog!=null){
+		if (ringProgressDialog != null) {
 			ringProgressDialog.show();
 		}
 	}
@@ -90,6 +92,16 @@ public class LoginActivity extends BaseActivity {
 				logMeIn(txtUsername.getText().toString(), txtPassword.getText().toString());
 			}
 		});
+		StringBuilder sbUrl = new StringBuilder();
+		sbUrl.append(getResources().getString(R.string.web_url));
+		sbUrl.append(getResources().getString(R.string.web_context));
+		sbUrl.append(getResources().getString(R.string.web_app_context));
+		sbUrl.append(getResources().getString(R.string.register_page));
+		String registerText = getResources().getString(R.string.text_register).replace("${requestAccess}",
+				sbUrl.toString());
+		TextView txtRegister = (TextView) findViewById(R.id.txtRegister);
+		txtRegister.setText(Html.fromHtml(registerText));
+		txtRegister.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	public void logMeIn(String username, String password) {

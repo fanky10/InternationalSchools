@@ -27,8 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.aenimastudio.nis.activities.LoginActivity"
-            android:noHistory="true" />
+            android:name="com.aenimastudio.nis.activities.LoginActivity"/>
         <activity
             android:name="com.aenimastudio.nis.activities.NewsBrowserActivity"
             android:configChanges="orientation|screenSize" />
