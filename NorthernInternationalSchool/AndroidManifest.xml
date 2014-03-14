@@ -23,11 +23,11 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.aenimastudio.nis.activities.LoginActivity"/>
+        <activity android:name="com.aenimastudio.nis.activities.LoginActivity" />
         <activity
             android:name="com.aenimastudio.nis.activities.NewsBrowserActivity"
             android:configChanges="orientation|screenSize" />
@@ -36,7 +36,14 @@
             android:configChanges="orientation|screenSize" />
         <activity
             android:name="com.aenimastudio.nis.activities.SimpleBrowserActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="com.aenimastudio" />
+                <category android:name="android.intent.category.BROWSABLE" /> 
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

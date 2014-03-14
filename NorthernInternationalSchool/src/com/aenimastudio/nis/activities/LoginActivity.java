@@ -93,6 +93,7 @@ public class LoginActivity extends BaseActivity {
 			}
 		});
 		StringBuilder sbUrl = new StringBuilder();
+		sbUrl.append(getResources().getString(R.string.intent_scheme));
 		sbUrl.append(getResources().getString(R.string.web_url));
 		sbUrl.append(getResources().getString(R.string.web_context));
 		sbUrl.append(getResources().getString(R.string.web_app_context));
