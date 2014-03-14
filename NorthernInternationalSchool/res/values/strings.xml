@@ -43,10 +43,11 @@
 
     <!-- color configuration -->
     <color name="home_background">#007EA3</color>
-    <color name="browser_menu_separator">#116b8b</color>
+    <color name="login_submit_color">#1CDCFF</color>
+    <color name="login_register_color">#1cdcff</color>
+    <color name="browser_menu_separator">#b2b2b2</color>
     <color name="browser_menu_warning">#484848</color>
     <color name="login_input_borders">#bcbdc0</color>
-    <color name="login_submit_color">#1CDCFF</color>
     
     <!-- pointer colors -->
     <color name="login_background">@color/home_background</color>
