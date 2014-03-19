@@ -40,7 +40,7 @@
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="com.aenimastudio" />
+                <data android:scheme="com.aenimastudio.nis" />
                 <category android:name="android.intent.category.BROWSABLE" /> 
             </intent-filter>
         </activity>
