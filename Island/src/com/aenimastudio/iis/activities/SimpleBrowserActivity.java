@@ -1,5 +1,7 @@
 package com.aenimastudio.iis.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +14,7 @@ import com.aenimastudio.iis.content.NetworkStatus;
 import com.aenimastudio.iis.content.NetworkStatusListener;
 
 public class SimpleBrowserActivity extends MinBrowserActivity {
-	
+
 	protected void init() {
 		super.init();
 		webView.getSettings().setUseWideViewPort(true);
@@ -21,11 +23,19 @@ public class SimpleBrowserActivity extends MinBrowserActivity {
 
 	@Override
 	protected void loadWebPage() {
-		Bundle bundle = getIntent().getExtras();
-		if (bundle == null) {
-			throw new IllegalArgumentException("This Activity should be intented with a bundle object");
+		Intent intent = getIntent();
+		String sharedUrl = null;
+		if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+			Uri uri = intent.getData();
+			String intentScheme = getResources().getString(R.string.intent_scheme);
+			sharedUrl = uri.toString().substring(intentScheme.length());
+		} else {
+			Bundle bundle = intent.getExtras();
+			if (bundle == null) {
+				throw new IllegalArgumentException("This Activity should be intented with a bundle object");
+			}
+			sharedUrl = bundle.getString(AppConstants.SHARED_URL_KEY);
 		}
-		String sharedUrl = bundle.getString(AppConstants.SHARED_URL_KEY);
 		if (sharedUrl == null || sharedUrl.isEmpty()) {
 			throw new IllegalArgumentException("This Activity should be intented with a valid url");
 		}
