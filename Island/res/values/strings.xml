@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">IslandsInternationalSchool</string>
+    <string name="app_name">Islands International School</string>
     <string name="web_url">http://ismobileapp.com</string>
     <string name="web_context">/international_schools</string>
     <string name="web_app_context">/islands-school</string>
