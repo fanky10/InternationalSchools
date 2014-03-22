@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aenimastudio.iis"
-    android:versionCode="2"
-    android:versionName="1.7-RC" >
+    android:versionCode="3"
+    android:versionName="1.8-RC2" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -29,8 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.aenimastudio.iis.activities.LoginActivity"
-            android:noHistory="true" />
+            android:name="com.aenimastudio.iis.activities.LoginActivity"/>
         <activity
             android:name="com.aenimastudio.iis.activities.NewsBrowserActivity"
             android:configChanges="orientation|screenSize" />
@@ -39,7 +38,14 @@
             android:configChanges="orientation|screenSize" />
         <activity
             android:name="com.aenimastudio.iis.activities.SimpleBrowserActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="com.aenimastudio.iis" />
+                <category android:name="android.intent.category.BROWSABLE" /> 
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

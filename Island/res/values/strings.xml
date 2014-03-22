@@ -1,15 +1,17 @@
 <resources>
 
-    <string name="app_name">IslandsInternationalSchool</string>
+    <string name="app_name">Islands International School</string>
     <string name="web_url">http://ismobileapp.com</string>
     <string name="web_context">/international_schools</string>
     <string name="web_app_context">/islands-school</string>
+    <string name="intent_scheme">com.aenimastudio.iis://</string>
     
     <!-- static across apps -->
     <string name="login_page">/login.php</string>
     <string name="logout_page">/logout.php</string>
     <string name="news_page">/news.php</string>
     <string name="food_menu_page">/menu.php</string>
+    <string name="register_page">/request-access.php</string>
     <string name="news_param_user_id">id_usuario</string>
     <string name="login_field_username">user</string>
     <string name="login_field_password">pass</string>
@@ -21,7 +23,7 @@
     <string name="hint_username">Usuario</string>
     <string name="hint_password">Contraseña</string>
     <string name="text_submit">INICIAR</string>
-    <string name="text_register">Solicitá tu usuario y contraseña. <a href="#">Click Aquí</a></string>
+    <string name="text_register"><![CDATA[Solicitá tu usuario y contraseña. <a href="${requestAccess}" >Click Aquí</a>]]></string>
     <string name="text_no_conection_warn">No hay conexión a Internet</string>
     <string name="text_ask_logout">Está seguro que desea cerrar la sesión?</string>
     <string name="text_confirm_logout">CERRAR SESION</string>

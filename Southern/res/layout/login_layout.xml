@@ -73,7 +73,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/loginFormLayout"
             android:layout_marginTop="10dp"
-            android:autoLink="web"
             android:gravity="center"
             android:linksClickable="true"
             android:text="@string/text_register"
