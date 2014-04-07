@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aenimastudio.sis"
+    package="org.intschools.southern"
     android:versionCode="3"
     android:versionName="1.8-RC2" >
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="18" />
 
     <!-- permission list -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,7 +20,7 @@
 
         <!-- launch activity -->
         <activity
-            android:name="com.aenimastudio.sis.activities.SplashISLogoActivity"
+            android:name="org.intschools.southern.activities.SplashISLogoActivity"
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,20 +29,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.aenimastudio.sis.activities.LoginActivity"/>
+            android:name="org.intschools.southern.activities.LoginActivity"/>
         <activity
-            android:name="com.aenimastudio.sis.activities.NewsBrowserActivity"
+            android:name="org.intschools.southern.activities.NewsBrowserActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="com.aenimastudio.sis.activities.FoodMenuBrowserActivity"
+            android:name="org.intschools.southern.activities.FoodMenuBrowserActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="com.aenimastudio.sis.activities.SimpleBrowserActivity"
+            android:name="org.intschools.southern.activities.SimpleBrowserActivity"
             android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="com.aenimastudio.sis" />
+                <data android:scheme="org.intschools.southern" />
                 <category android:name="android.intent.category.BROWSABLE" /> 
             </intent-filter>
         </activity>
