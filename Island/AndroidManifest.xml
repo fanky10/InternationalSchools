@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aenimastudio.iis"
+    package="org.intschools.islands"
     android:versionCode="3"
     android:versionName="1.8-RC2" >
 
@@ -20,7 +20,7 @@
 
         <!-- launch activity -->
         <activity
-            android:name="com.aenimastudio.iis.activities.SplashISLogoActivity"
+            android:name="org.intschools.islands.activities.SplashISLogoActivity"
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,20 +29,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.aenimastudio.iis.activities.LoginActivity"/>
+            android:name="org.intschools.islands.activities.LoginActivity"/>
         <activity
-            android:name="com.aenimastudio.iis.activities.NewsBrowserActivity"
+            android:name="org.intschools.islands.activities.NewsBrowserActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="com.aenimastudio.iis.activities.FoodMenuBrowserActivity"
+            android:name="org.intschools.islands.activities.FoodMenuBrowserActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="com.aenimastudio.iis.activities.SimpleBrowserActivity"
+            android:name="org.intschools.islands.activities.SimpleBrowserActivity"
             android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="com.aenimastudio.iis" />
+                <data android:scheme="org.intschools.islands" />
                 <category android:name="android.intent.category.BROWSABLE" /> 
             </intent-filter>
         </activity>

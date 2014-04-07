@@ -4,7 +4,7 @@
     <string name="web_url">http://ismobileapp.com</string>
     <string name="web_context">/international_schools</string>
     <string name="web_app_context">/islands-school</string>
-    <string name="intent_scheme">com.aenimastudio.iis://</string>
+    <string name="intent_scheme">org.intschools.islands://</string>
     
     <!-- static across apps -->
     <string name="login_page">/login.php</string>
