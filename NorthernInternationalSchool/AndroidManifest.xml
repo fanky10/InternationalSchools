@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aenimastudio.nis"
+    package="org.intschools.northern"
     android:versionCode="3"
     android:versionName="1.8-RC2" >
 
@@ -19,7 +19,7 @@
 
         <!-- launch activity -->
         <activity
-            android:name="com.aenimastudio.nis.activities.SplashNISActivity"
+            android:name="org.intschools.northern.activities.SplashNISActivity"
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,20 +27,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.aenimastudio.nis.activities.LoginActivity" />
+        <activity android:name="org.intschools.northern.activities.LoginActivity" />
         <activity
-            android:name="com.aenimastudio.nis.activities.NewsBrowserActivity"
+            android:name="org.intschools.northern.activities.NewsBrowserActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="com.aenimastudio.nis.activities.FoodMenuBrowserActivity"
+            android:name="org.intschools.northern.activities.FoodMenuBrowserActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="com.aenimastudio.nis.activities.SimpleBrowserActivity"
+            android:name="org.intschools.northern.activities.SimpleBrowserActivity"
             android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="com.aenimastudio.nis" />
+                <data android:scheme="org.intschools.northern" />
                 <category android:name="android.intent.category.BROWSABLE" /> 
             </intent-filter>
         </activity>

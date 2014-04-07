@@ -20,7 +20,7 @@
             android:layout_alignParentTop="true"
             layout="@layout/browser_menu_layout" />
 
-        <com.aenimastudio.nis.widget.PullToRefreshDestroyableWebView
+        <org.intschools.northern.widget.PullToRefreshDestroyableWebView
             android:id="@+id/ptrWebView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

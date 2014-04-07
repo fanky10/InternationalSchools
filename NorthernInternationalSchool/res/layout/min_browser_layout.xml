@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         layout="@layout/browser_menu_layout" />
 
-    <com.aenimastudio.nis.widget.DestroyableWebView
+    <org.intschools.northern.widget.DestroyableWebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
